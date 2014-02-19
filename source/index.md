@@ -34,42 +34,42 @@ Thanks to the great community we have language bindings for Ruby, Python, PHP, P
     <th>Featured in documentation</th>
   </tr>
   <tr>
-    <th>PHP</th>
+    <td><strong>PHP</strong></td>
     <td><a href="https://github.com/davidstanley01/geocodio-php" target="_blank">davidstanley01/geocodio-php</a> by <a href="https://twitter.com/davidstanley01" target="_blank">@davidstanley01</a></td>
     <td><i class="fa fa-check"></i></td>
   </tr>
   <tr>
-    <th>Ruby</th>
+    <td><strong>Ruby</strong></td>
     <td><a href="https://github.com/alexreisner/geocoder" target="_blank">alexreisner/geocoder</a> supports Geocodio thanks to PR by <a href="https://twitter.com/dblockdotorg" target="_blank">@dblockdotorg</a></td>
     <td><i class="fa fa-minus"></i></td>
   </tr>
   <tr>
-    <th>Ruby</th>
+    <td><strong>Ruby</strong></td>
     <td><a href="https://github.com/davidcelis/geocodio" target="_blank">davidcelis/geocodio</a> by <a href="https://twitter.com/davidcelis" target="_blank">@davidcelis</a></td>
     <td><i class="fa fa-check"></i></td>
   </tr>
   <tr>
-    <th>Python</th>
+    <td><strong>Python</strong></td>
     <td><a href="https://github.com/bennylope/pygeocodio" target="_blank">bennylope/pygeocodio</a> by <a href="https://twitter.com/bennylope" target="_blank">@bennylope</a></td>
     <td><i class="fa fa-check"></i></td>
   </tr>
   <tr>
-    <th>Python</th>
+    <td><strong>Python</strong></td>
     <td><a href="https://github.com/davidstanley01/Geocodio.py" target="_blank">davidstanley01/Geocodio.py</a> by <a href="https://twitter.com/davidstanley01" target="_blank">@davidstanley01</a></td>
     <td><i class="fa fa-minus"></i></td>
   </tr>
   <tr>
-    <th>Node.js</th>
+    <td><strong>Node.js</strong></td>
     <td><a href="https://github.com/desmondmorris/node-geocodio" target="_blank">desmondmorris/node-geocodio</a> by <a href="https://twitter.com/desmondmorris" target="_blank">@desmondmorris</a></td>
     <td><i class="fa fa-check"></i></td>
   </tr>
   <tr>
-    <th>Clojure</th>
+    <td><strong>Clojure</strong></td>
     <td><a href="https://github.com/jboverfelt/rodeo" target="_blank">jboverfelt/rodeo</a> by <a href="https://twitter.com/j_felt08" target="_blank">@j_felt08</a></td>
     <td><i class="fa fa-check"></i></td>
   </tr>
   <tr>
-    <th>Perl</th>
+    <td><strong>Perl</strong></td>
     <td><a href="https://github.com/mrallen1/WebService-Geocodio" target="_blank">mrallen1/WebService-Geocodio</a> by <a href="https://twitter.com/bytemeorg" target="_blank">@bytemeorg</a></td>
     <td><i class="fa fa-check"></i></td>
   </tr>

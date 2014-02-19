@@ -352,6 +352,7 @@ html, body {
     margin-bottom: 1.5em;
     background: $aside-notice-bg;
     line-height: 1.6;
+    color: #FFF;
 
     &.warning {
       background-color: $aside-warning-bg;
@@ -427,7 +428,7 @@ html, body {
       background-color: $code-annotation-bg;
       border-radius: 5px;
       padding: $code-annotation-padding;
-      color: #ccc;
+      color: $code-annotation-text;
       border-top: 1px solid #000;
       border-bottom: 1px solid #404040;
     }

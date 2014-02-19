@@ -24,11 +24,13 @@ under the License.
     <!-- Use title if it's in the page YAML frontmatter -->
     <title><%= current_page.data.title || "API Documentation" %></title>
 
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" type="text/css">
     <%= stylesheet_link_tag "screen", media: 'screen' %>
     <%= stylesheet_link_tag "print", media: 'print' %>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <%= javascript_include_tag  "all" %>
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+
 
     <script>
       $(function() {

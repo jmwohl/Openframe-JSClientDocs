@@ -55,6 +55,7 @@ html, body {
   &>img {
     display: block;
     margin-bottom: $logo-margin;
+    width: $nav-width;
   }
 
   .tocify-item>a, .toc-footer li {

@@ -425,6 +425,8 @@ Geocodio will find matching street(s) and determine the correct house number bas
 
 As with forward geocoding, you can either geocode a single set of coordinates at the time or collect multiple coordinates in batches and reverse geocode up to 10,000 coordinates at the time.
 
+This endpoint can return up to 5 possible matches ranked and ordered by an [accuracy score](#toc_20).
+
 <aside class="success">
 A geographic coordinate consists of latitude followed by latitude separated by a comma, e.g. `38.9002898,-76.9990361`
 </aside>

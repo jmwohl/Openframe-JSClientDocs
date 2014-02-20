@@ -7,7 +7,7 @@ language_tabs:
   - python
   - php
   - perl
-  - javascript
+  - javascript: Node.js
   - clojure
 
 toc_footers:
@@ -21,7 +21,11 @@ Geocodio is a geocoding service that aims to fill a void in the community by all
 
 Our pricing structure is simple, you get the first 2,500 queries per day for free and after that you are charged $0.001 per query (yep, that's $1 per 1,000 geocoding queries).
 
-We provide a simple RESTful API, with a base url at `http://api.geocod.io/v1/`, note the versioning prefix which is required for all requests.
+We provide a simple RESTful API, with a base url at `http://api.geocod.io/v1/`.
+
+<aside class="notice">
+Note the versioning prefix in the base url, which is required for all requests.
+</aside>
 
 # Libraries
 
@@ -135,25 +139,31 @@ var geocodio = new Geocodio(config);
 ;; You can set the API key in the GEOCODIO_API_KEY environment variable
 ```
 
-> Make sure to replace `YOUR_API_KEY` with your API key.
-
 All requests require an API key, you can [register here](https://dash.geocod.io) to get your own API key.
 
 The API key must be included in all requests using the `?api_key=YOUR_API_KEY` query parameter.
 
-Each account can have multiple API keys. This is ideal if you're working on several projects and want to be able to revoke access using the API key for a single project in the future or if you want to keep track of usage based on API key.
+Each account can have multiple API keys. This is ideal if you're working on several projects and want to be able to revoke access using the API key for a single project in the future or if you want to keep track of usage per API key.
 
-<aside class="notice">
-You must replace `YOUR_API_KEY` with your personal API key found in the [Geocodio dashboard](https://dash.gecod.io).
+<aside class="warning">
+Make sure to replace `YOUR_API_KEY` with your personal API key found in the [Geocodio dashboard](https://dash.gecod.io).
 </aside>
 
 # Geocoding
 
 Geocoding (also known as forward geocoding) allows you to convert one or more addresses into geographic coordinates (i.e. latitude and longitude).
 
+Geocodio supports geocoding of addresses, cities and zip codes in all kinds of various formats.
+
+<aside class="notice">
+Make sure to check the [address formats](#toc_21) section for more information on the different address formats supported.
+</aside>
+
 You can either geocode a single address at the time or collect multiple addresses in batches in order to geocode up to 10,000 addresses at the time.
 
 ## Geocoding single address
+
+A single address can be geocoded by making a simple `GET` request to the *geocode* endpoint, you can <a href="http://api.geocod.io/v1/geocode?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&api_key=YOUR_API_KEY" target="_blank">try this in your browser right now</a>.
 
 > To geocode a single address:
 
@@ -270,10 +280,6 @@ Parameter | Description
 --------- | -----------
 q | The query (i.e. address) to geocode
 api_key | Your Geocodio API key
-
-<aside class="notice">
-Make sure to check the [address formatting](#toc_20) section for more information on the different address formats supported.
-</aside>
 
 ## Batch geocoding
 
@@ -393,6 +399,14 @@ var geocodio = new Geocodio(config);
 }
 ```
 
+If you have several addresses that you need to geocode, batch geocoding is a much faster options since it removes the overhead of having to perform multiple `HTTP` requests.
+
+Batch geocoding requests are performed by making a `POST` request to the *geocode* endpoint, suppliying a `JSON` array in the body.
+
+<aside class="warning">
+You can batch geocode up to 10,000 addresses at the time.
+</aside>
+
 ### HTTP Request
 
 `POST http://api.geocod.io/v1/geocode`
@@ -403,13 +417,11 @@ Parameter | Description
 --------- | -----------
 api_key | Your Geocodio API key
 
-<aside class="notice">
-Make sure to check the [address formatting](#toc_20) section for more information on the different address formats supported.
-</aside>
-
 # Reverse Geocoding
 
 Reverse geocoding is the process of turning geographic coordinates (i.e. latitude and longitude) into a human-readable address.
+
+Geocodio will find matching street(s) and determine the correct house number based on the location, note that Geocodio doesn't guarantee that the exact house number is valid.
 
 As with forward geocoding, you can either geocode a single set of coordinates at the time or collect multiple coordinates in batches and reverse geocode up to 10,000 coordinates at the time.
 

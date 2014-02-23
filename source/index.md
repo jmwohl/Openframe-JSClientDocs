@@ -865,7 +865,7 @@ var config = {
 
 var geocodio = new Geocodio(config);
 
-geocodio.parse('42370 Bob Hope Drive, Rancho Mirage CA', function(err, address){
+geocodio.parse('42370 Bob Hope Drive, Rancho Mirage CA', function(err, address) {
     if (err) throw err;
 
     console.log(address);

@@ -923,7 +923,7 @@ For example, if against all odds an address simply can't be found — instead of
 Results are always returned ordered by accuracy score.
 
 # Address formats
-Geocodio allows you to geocode addresses, cities or zip codes. A street address needs to have either a zip OR a city/state combination. If a city is provided without a state, Geocodio will automatically guess and add the state based on what it most likely might be.
+Geocodio allows you to geocode addresses, cities or zip codes. A street address needs to have either a zip OR a city/state combination. If a city is provided without a state, Geocodio will automatically guess and add the state based on what it most likely might be. Geocodio also understands shorthands for both streets and cities, e.g. *NYC*, *SF*, etc. are acceptable city names.
 
 Addresses that are used with the geocoding API need to be predictably formatted. Here are some examples of valid addresses:
 

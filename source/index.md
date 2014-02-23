@@ -289,12 +289,23 @@ curl -X POST \
 require 'geocodio'
 
 geocodio = Geocodio::Client.new('YOUR_API_KEY')
+
+locations = geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', '1290 Northbrook Court Mall, Northbrook IL', '4410 S Highway 17 92, Casselberry FL', '15000 NE 24th Street, Redmond WA', '17015 Walnut Grove Drive, Morgan Hill CA')
+
 ```
 
 ```python
 from geocodio import GeocodioClient
 
 client = GeocodioClient(YOUR_API_KEY)
+
+locations = geocodio.geocode([
+  '42370 Bob Hope Drive, Rancho Mirage CA',
+  '1290 Northbrook Court Mall, Northbrook IL',
+  '4410 S Highway 17 92, Casselberry FL',
+  '15000 NE 24th Street, Redmond WA',
+  '17015 Walnut Grove Drive, Morgan Hill CA'
+])
 ```
 
 ```php
@@ -304,6 +315,15 @@ use Stanley\Geocodio\Client;
 
 // Create the new Client object by passing in your api key
 $client = new Client('YOUR_API_KEY');
+
+$data = array(
+  '42370 Bob Hope Drive, Rancho Mirage CA',
+  '1290 Northbrook Court Mall, Northbrook IL',
+  '4410 S Highway 17 92, Casselberry FL',
+  '15000 NE 24th Street, Redmond WA',
+  '17015 Walnut Grove Drive, Morgan Hill CA'
+);
+$locations = $client->post($data);
 ```
 
 ```javascript
@@ -314,6 +334,20 @@ var config = {
 }
 
 var geocodio = new Geocodio(config);
+
+var addresses = [
+  '42370 Bob Hope Drive, Rancho Mirage CA',
+  '1290 Northbrook Court Mall, Northbrook IL',
+  '4410 S Highway 17 92, Casselberry FL',
+  '15000 NE 24th Street, Redmond WA',
+  '17015 Walnut Grove Drive, Morgan Hill CA'
+];
+
+geocodio.geocode(addresses, function(err, locations) {
+    if (err) throw err;
+
+    console.log(locations);
+});
 ```
 
 ```clojure
@@ -321,6 +355,8 @@ var geocodio = new Geocodio(config);
   (:require [rodeo.core :refer :all]))
 
 ;; You can set the API key in the GEOCODIO_API_KEY environment variable
+
+(batch ["42370 Bob Hope Drive, Rancho Mirage CA", "1290 Northbrook Court Mall, Northbrook IL", "4410 S Highway 17 92, Casselberry FL", "15000 NE 24th Street, Redmond WA", "17015 Walnut Grove Drive, Morgan Hill CA"])
 ```
 
 > Example response:
@@ -426,12 +462,16 @@ curl "http://api.geocod.io/v1/reverse?q=38.9002898,-76.9990361&api_key=YOUR_API_
 require 'geocodio'
 
 geocodio = Geocodio::Client.new('YOUR_API_KEY')
+
+addresses = geocodio.reverse_geocode('38.9002898,-76.9990361')
 ```
 
 ```python
 from geocodio import GeocodioClient
 
 client = GeocodioClient(YOUR_API_KEY)
+
+addresses = client.reverse((38.9002898, -76.9990361))
 ```
 
 ```php
@@ -441,6 +481,8 @@ use Stanley\Geocodio\Client;
 
 // Create the new Client object by passing in your api key
 $client = new Client('YOUR_API_KEY');
+
+$addresses = $client->reverse('38.9002898,-76.9990361');
 ```
 
 ```javascript
@@ -451,6 +493,13 @@ var config = {
 }
 
 var geocodio = new Geocodio(config);
+
+geocodio.reverse('38.9002898,-76.9990361', function(err, addresses) {
+    if (err) throw err;
+
+    console.log(addresses);
+});
+
 ```
 
 ```clojure
@@ -458,6 +507,8 @@ var geocodio = new Geocodio(config);
   (:require [rodeo.core :refer :all]))
 
 ;; You can set the API key in the GEOCODIO_API_KEY environment variable
+
+(single-reverse "38.9002898,-76.9990361")
 ```
 
 > Example response:
@@ -548,12 +599,21 @@ curl -X POST \
 require 'geocodio'
 
 geocodio = Geocodio::Client.new('YOUR_API_KEY')
+
+address_sets = geocodio.reverse_geocode('35.9746000,-77.9658000', '32.8793700,-96.6303900', '33.8337100,-117.8362320', '35.4171240,-80.6784760')
 ```
 
 ```python
 from geocodio import GeocodioClient
 
 client = GeocodioClient(YOUR_API_KEY)
+
+address_sets = client.reverse([
+  ('35.9746000,-77.9658000'),
+  ('32.8793700,-96.6303900'),
+  ('33.8337100,-117.8362320'),
+  ('35.4171240,-80.6784760)'
+])
 ```
 
 ```php
@@ -563,6 +623,8 @@ use Stanley\Geocodio\Client;
 
 // Create the new Client object by passing in your api key
 $client = new Client('YOUR_API_KEY');
+
+$address_sets = $client->reverse(array('35.9746000,-77.9658000', '32.8793700,-96.6303900', '33.8337100,-117.8362320', '35.4171240,-80.6784760'));
 ```
 
 ```javascript
@@ -573,6 +635,19 @@ var config = {
 }
 
 var geocodio = new Geocodio(config);
+
+var coordinates = [
+  '35.9746000,-77.9658000',
+  '32.8793700,96.6303900',
+  '33.8337100,117.8362320',
+  '35.4171240,-80.6784760'
+];
+
+geocodio.reverse(coordinates, function(err, address_sets){
+    if (err) throw err;
+
+    console.log(address_sets);
+});
 ```
 
 ```clojure
@@ -580,6 +655,8 @@ var geocodio = new Geocodio(config);
   (:require [rodeo.core :refer :all]))
 
 ;; You can set the API key in the GEOCODIO_API_KEY environment variable
+
+(batch-reverse ["35.9746000,-77.9658000", "32.8793700,-96.6303900", "33.8337100,-117.8362320", "35.4171240,-80.6784760"])
 ```
 
 > Example response:
@@ -756,12 +833,16 @@ curl http://api.geocod.io/v1/parse?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&ap
 require 'geocodio'
 
 geocodio = Geocodio::Client.new('YOUR_API_KEY')
+
+address = geocodio.parse('42370 Bob Hope Drive, Rancho Mirage CA')
 ```
 
 ```python
 from geocodio import GeocodioClient
 
 client = GeocodioClient(YOUR_API_KEY)
+
+address = client.parse('42370 Bob Hope Drive, Rancho Mirage CA')
 ```
 
 ```php
@@ -771,6 +852,8 @@ use Stanley\Geocodio\Client;
 
 // Create the new Client object by passing in your api key
 $client = new Client('YOUR_API_KEY');
+
+$address = $client->parse('42370 Bob Hope Drive, Rancho Mirage CA');
 ```
 
 ```javascript
@@ -781,6 +864,12 @@ var config = {
 }
 
 var geocodio = new Geocodio(config);
+
+geocodio.parse('42370 Bob Hope Drive, Rancho Mirage CA', function(err, address){
+    if (err) throw err;
+
+    console.log(address);
+});
 ```
 
 ```clojure
@@ -788,6 +877,8 @@ var geocodio = new Geocodio(config);
   (:require [rodeo.core :refer :all]))
 
 ;; You can set the API key in the GEOCODIO_API_KEY environment variable
+
+(components "42370 Bob Hope Dr, Rancho Mirage CA")
 ```
 
 > Example response:

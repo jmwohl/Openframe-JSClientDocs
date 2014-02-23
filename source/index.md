@@ -16,6 +16,8 @@ toc_footers:
 
 # Introduction
 
+> <i class="fa fa-chevron-circle-up"></i> Pick your favorite programming language
+
 Geocodio is a geocoding service that aims to fill a void in the community by allowing developers to geocode large amounts of US addresses without worrying about daily limits and high costs.
 
 Our pricing structure is simple, you get the first 2,500 queries per day for free and after that you are charged $0.001 per query (yep, that's $1 per 1,000 geocoding queries).

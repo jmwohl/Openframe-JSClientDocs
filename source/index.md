@@ -18,9 +18,9 @@ toc_footers:
 
 > <i class="fa fa-chevron-circle-up"></i> Pick your favorite programming language
 
-Geocodio is a geocoding service that aims to fill a void in the community by allowing developers to geocode large amounts of US addresses without worrying about daily limits and high costs.
+Geocodio is a geocoding and reverse geocoding service that aims to fill a void in the community by allowing developers to geocode and reverse geocode large amounts of US addresses without worrying about daily limits and high costs.
 
-Our pricing structure is simple, you get the first 2,500 queries per day for free and after that you are charged $0.001 per query (yep, that's $1 per 1,000 geocoding queries).
+Our pricing structure is simple: you get the first 2,500 queries per day for free and after that you are charged $0.001 per query (yep, that's $1 per 1,000 geocoding queries). This applies to all users.
 
 We provide a simple RESTful API, with a base url at `http://api.geocod.io/v1/`.
 
@@ -30,9 +30,9 @@ Note the versioning prefix in the base url, which is required for all requests.
 
 # Libraries
 
-Thanks to the great community we have language bindings for Ruby, Python, PHP, Perl, Node.js and Clojure.
+Thanks to our great community, we have language bindings for Ruby, Python, PHP, Perl, Node.js and Clojure.
 
-Basic examples for various languages are provided here, but please make sure to check out the full documentation for the individual libraries, linked below.
+Basic examples for various languages are provided here. Please make sure to check out the full documentation for the individual libraries (linked below).
 
 <table class="table">
   <tbody><tr>
@@ -132,11 +132,11 @@ var geocodio = new Geocodio(config);
 ;; You can set the API key in the GEOCODIO_API_KEY environment variable
 ```
 
-All requests require an API key, you can [register here](https://dash.geocod.io) to get your own API key.
+All requests require an API key. You can [register here](https://dash.geocod.io) to get your own API key.
 
 The API key must be included in all requests using the `?api_key=YOUR_API_KEY` query parameter.
 
-Each account can have multiple API keys. This is ideal if you're working on several projects and want to be able to revoke access using the API key for a single project in the future or if you want to keep track of usage per API key.
+Accounts can have multiple API keys. This is ideal if you're working on several projects and want to be able to revoke access using the API key for a single project in the future or if you want to keep track of usage per API key. And, you can download a CSV of usage and fees per API key if you need to bill clients for usage.
 
 <aside class="warning">
 Make sure to replace `YOUR_API_KEY` with your personal API key found in the [Geocodio dashboard](https://dash.gecod.io).
@@ -146,13 +146,13 @@ Make sure to replace `YOUR_API_KEY` with your personal API key found in the [Geo
 
 Geocoding (also known as forward geocoding) allows you to convert one or more addresses into geographic coordinates (i.e. latitude and longitude).
 
-Geocodio supports geocoding of addresses, cities and zip codes in all kinds of various formats.
+Geocodio supports geocoding of addresses, cities and zip codes in various formats.
 
 <aside class="notice">
 Make sure to check the [address formats](#toc_21) section for more information on the different address formats supported.
 </aside>
 
-You can either geocode a single address at the time or collect multiple addresses in batches in order to geocode up to 10,000 addresses at the time.
+You can either geocode a single address at a time or collect multiple addresses in batches in order to geocode up to 10,000 addresses at the time. Whenever possible, please make batch requests.
 
 ## Geocoding single address
 
@@ -444,7 +444,7 @@ api_key | Your Geocodio API key
 
 Reverse geocoding is the process of turning geographic coordinates (i.e. latitude and longitude) into a human-readable address.
 
-Geocodio will find matching street(s) and determine the correct house number based on the location, note that Geocodio doesn't guarantee that the exact house number is valid.
+Geocodio will find matching street(s) and determine the correct house number based on the location. Note that Geocodio may not return the exact house number; it is our closest approximation.
 
 As with forward geocoding, you can either geocode a single set of coordinates at the time or collect multiple coordinates in batches and reverse geocode up to 10,000 coordinates at the time.
 
@@ -819,12 +819,12 @@ Parameter | Description
 --------- | -----------
 api_key | Your Geocodio API key
 
-# Addres parsing
+# Address parsing
 
 If you just need to an address into individual components, Geocodio can help you too. 
 
 <aside class="notice">
-Note: Address parsing is free of charge and does not count towards your API usage, you will however still need an API key.
+Note: Address parsing is free of charge and does not count towards your API usage. (You still need an API key, though.)
 </aside>
 
 > To parse an address:
@@ -916,16 +916,16 @@ Make sure to check the [address formatting](#toc_20) section for more informatio
 </aside>
 
 # Accuracy score
-Each geocoded result is returned with an accuracy score, a decimal number ranging from 0.00 to 1.00. This score is generated by the internal Geocodio engine based on how accurate the result is believed to be. The higher the score the better the result.
+Each geocoded result is returned with an accuracy score, which is a decimal number ranging from 0.00 to 1.00. This score is generated by the internal Geocodio engine based on how accurate the result is believed to be. The higher the score the better the result.
 
 For example, if against all odds an address simply can't be found — instead of returning no results, Geocodio will return a geocoded point based on the zip code or city but with a much lower accuracy score.
 
 Results are always returned ordered by accuracy score.
 
 # Address formats
-Geocodio allows you to geocode addresses, cities or zip codes. A street addresses needs to have either a zip or a city/state combination included. If a city is provided without a state, Geocodio will automatically guess and add the state based on what it most likely might be.
+Geocodio allows you to geocode addresses, cities or zip codes. A street address needs to have either a zip OR a city/state combination. If a city is provided without a state, Geocodio will automatically guess and add the state based on what it most likely might be.
 
-Addresses that are used with the Geocoding API need to be predictably formatted, here are some examples of valid addresses:
+Addresses that are used with the geocoding API need to be predictably formatted. Here are some examples of valid addresses:
 
 * 42370 Bob Hope Dr, Rancho Mirage CA
 * 42370 Bob Hope Drive, Rancho Mirage CA

@@ -444,7 +444,7 @@ api_key | Your Geocodio API key
 
 Reverse geocoding is the process of turning geographic coordinates (i.e. latitude and longitude) into a human-readable address.
 
-Geocodio will find matching street(s) and determine the correct house number based on the location. Note that Geocodio may not return the exact house number; it is our closest approximation.
+Geocodio will find matching street(s) and determine the correct house number based on the location. Note that Geocodio does not guarantee to return a valid house number; it is our closest approximation.
 
 As with forward geocoding, you can either geocode a single set of coordinates at the time or collect multiple coordinates in batches and reverse geocode up to 10,000 coordinates at the time.
 

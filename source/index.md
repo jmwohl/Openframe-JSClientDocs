@@ -6,7 +6,6 @@ language_tabs:
   - ruby
   - python
   - php
-  - perl
   - javascript: Node.js
   - clojure
 
@@ -75,7 +74,7 @@ Thanks to the great community we have language bindings for Ruby, Python, PHP, P
   <tr>
     <td><strong>Perl</strong></td>
     <td><a href="https://github.com/mrallen1/WebService-Geocodio" target="_blank">mrallen1/WebService-Geocodio</a> by <a href="https://twitter.com/bytemeorg" target="_blank">@bytemeorg</a></td>
-    <td><i class="fa fa-check"></i></td>
+    <td><i class="fa fa-minus"></i></td>
   </tr>
   <tr>
     <td colspan="3">Are you the author of an awesome library that you would like to get featured here? Just <a href="mailto:hello@geocod.io">let us know</a>!</td>
@@ -110,16 +109,6 @@ use Stanley\Geocodio\Client;
 
 // Create the new Client object by passing in your api key
 $client = new Client('YOUR_API_KEY');
-```
-
-```perl
-use 5.014;
-use WebService::Geocodio;
-use WebService::Geocodio::Location;
-
-my $geo = WebService::Geocodio->new(
-    api_key => 'YOUR_API_KEY'
-);
 ```
 
 ```javascript
@@ -175,12 +164,16 @@ curl "http://api.geocod.io/v1/geocode?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA
 require 'geocodio'
 
 geocodio = Geocodio::Client.new('YOUR_API_KEY')
+
+location = geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA')
 ```
 
 ```python
 from geocodio import GeocodioClient
 
 client = GeocodioClient(YOUR_API_KEY)
+
+location = client.geocode("42370 Bob Hope Drive, Rancho Mirage CA")
 ```
 
 ```php
@@ -190,16 +183,8 @@ use Stanley\Geocodio\Client;
 
 // Create the new Client object by passing in your api key
 $client = new Client('YOUR_API_KEY');
-```
 
-```perl
-use 5.014;
-use WebService::Geocodio;
-use WebService::Geocodio::Location;
-
-my $geo = WebService::Geocodio->new(
-    api_key => 'YOUR_API_KEY'
-);
+$location = $client->get('42370 Bob Hope Drive, Rancho Mirage CA');
 ```
 
 ```javascript
@@ -210,6 +195,12 @@ var config = {
 }
 
 var geocodio = new Geocodio(config);
+
+geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', function(err, location){
+    if (err) throw err;
+
+    console.log(location);
+});
 ```
 
 ```clojure
@@ -217,6 +208,8 @@ var geocodio = new Geocodio(config);
   (:require [rodeo.core :refer :all]))
 
 ;; You can set the API key in the GEOCODIO_API_KEY environment variable
+
+(single "42370 Bob Hope Drive, Rancho Mirage CA")
 ```
 
 > Example response:
@@ -311,16 +304,6 @@ use Stanley\Geocodio\Client;
 
 // Create the new Client object by passing in your api key
 $client = new Client('YOUR_API_KEY');
-```
-
-```perl
-use 5.014;
-use WebService::Geocodio;
-use WebService::Geocodio::Location;
-
-my $geo = WebService::Geocodio->new(
-    api_key => 'YOUR_API_KEY'
-);
 ```
 
 ```javascript
@@ -460,16 +443,6 @@ use Stanley\Geocodio\Client;
 $client = new Client('YOUR_API_KEY');
 ```
 
-```perl
-use 5.014;
-use WebService::Geocodio;
-use WebService::Geocodio::Location;
-
-my $geo = WebService::Geocodio->new(
-    api_key => 'YOUR_API_KEY'
-);
-```
-
 ```javascript
 var Geocodio = require('geocodio');
 
@@ -590,16 +563,6 @@ use Stanley\Geocodio\Client;
 
 // Create the new Client object by passing in your api key
 $client = new Client('YOUR_API_KEY');
-```
-
-```perl
-use 5.014;
-use WebService::Geocodio;
-use WebService::Geocodio::Location;
-
-my $geo = WebService::Geocodio->new(
-    api_key => 'YOUR_API_KEY'
-);
 ```
 
 ```javascript
@@ -808,16 +771,6 @@ use Stanley\Geocodio\Client;
 
 // Create the new Client object by passing in your api key
 $client = new Client('YOUR_API_KEY');
-```
-
-```perl
-use 5.014;
-use WebService::Geocodio;
-use WebService::Geocodio::Location;
-
-my $geo = WebService::Geocodio->new(
-    api_key => 'YOUR_API_KEY'
-);
 ```
 
 ```javascript

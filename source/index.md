@@ -436,7 +436,7 @@ A geographic coordinate consists of latitude followed by latitude separated by a
 > To reverse geocode a single coordinate:
 
 ```shell
-curl http://api.geocod.io/v1/reverse?q=38.9002898,-76.9990361&api_key=YOUR_API_KEY
+curl "http://api.geocod.io/v1/reverse?q=38.9002898,-76.9990361&api_key=YOUR_API_KEY"
 ```
 
 ```ruby
@@ -547,6 +547,8 @@ var geocodio = new Geocodio(config);
 }
 ```
 
+A single coordinate can be reverse geocoded by making a simple `GET` request to the *reverse* endpoint, you can <a href="http://api.geocod.io/v1/reverse?q=38.9002898,-76.9990361&api_key=YOUR_API_KEY" target="_blank">try this in your browser right now</a>.
+
 ### HTTP Request
 
 `GET http://api.geocod.io/v1/reverse`
@@ -557,10 +559,6 @@ Parameter | Description
 --------- | -----------
 q | The query (i.e. latitude/longitude pair) to geocode
 api_key | Your Geocodio API key
-
-<aside class="notice">
-Make sure to check the [address formatting](#toc_20) section for more information on the different address formats supported.
-</aside>
 
 ## Batch reverse geocoding
 
@@ -759,6 +757,14 @@ var geocodio = new Geocodio(config);
 }
 ```
 
+If you have several coordinates that you need to reverse geocode, batch reverse geocoding is a much faster options since it removes the overhead of having to perform multiple `HTTP` requests.
+
+Batch reverse geocoding requests are performed by making a `POST` request to the *reverse* endpoint, suppliying a `JSON` array in the body.
+
+<aside class="warning">
+You can batch reverse geocode up to 10,000 coordinates at the time.
+</aside>
+
 ### HTTP Request
 
 `POST http://api.geocod.io/v1/reverse`
@@ -768,10 +774,6 @@ var geocodio = new Geocodio(config);
 Parameter | Description
 --------- | -----------
 api_key | Your Geocodio API key
-
-<aside class="notice">
-Make sure to check the [address formatting](#toc_20) section for more information on the different address formats supported.
-</aside>
 
 # Addres parsing
 
@@ -852,13 +854,13 @@ var geocodio = new Geocodio(config);
 
 ### HTTP Request
 
-`GET http://api.geocod.io/v1/geocode`
+`GET http://api.geocod.io/v1/parse`
 
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
-q | The query (i.e. address) to geocode
+q | The query (i.e. address) to parse
 api_key | Your Geocodio API key
 
 <aside class="notice">
@@ -873,17 +875,18 @@ For example, if against all odds an address simply can't be found — instead of
 Results are always returned ordered by accuracy score.
 
 # Address formats
-Addresses that are used with the Geocoding API need to be predictably formatted. In addition, you must provide either a zip code or a city/state combination. You can also just provide a zip code or city if you want to geocode a general area instead of a specific address.
+Geocodio allows you to geocode addresses, cities or zip codes. A street addresses needs to have either a zip or a city/state combination included. If a city is provided without a state, Geocodio will automatically guess and add the state based on what it most likely might be.
 
-## Examples of valid address formats:
+Addresses that are used with the Geocoding API need to be predictably formatted, here are some examples of valid addresses:
+
 * 42370 Bob Hope Dr, Rancho Mirage CA
 * 42370 Bob Hope Drive, Rancho Mirage CA
 * 42370 Bob Hope Dr, Rancho Mirage, CA
 * 42370 Bob Hope Dr, Rancho Mirage CA
 * 42370 Bob Hope Dr, 92270
 * Rancho Mirage, CA
+* Rancho Mirage
 * 92270
-
 
 # Errors
 > Here is an example of a 422 Unprocessable Entity response:
@@ -904,17 +907,27 @@ Error Code | Meaning
 500 Server Error | Hopefully you will never see this...it means that something went wrong in our end. Whoops.
 
 
-# CORS
-The Geocodio API supports `CORS` using the `Access-Control-Allow-Origin` *HTTP* header. This means that you will be able to make requests directly to the API using JavaScript. Here is a jQuery example:
+# Client-side access
+> To Geocode an address using a jQuery AJAX call.
 
-```javascript
+```html
+<script>
 var address = '42370 Bob Hope Dr, Rancho Mirage CA',
     apiKey = 'YOUR_API_KEY';
 
 $.get('http://api.geocod.io/v1/geocode?q='+ encodeURIComponent(address) +'&api_key=' + encodeURIComponent(apiKey), function (response) {
   console.log(response.results);
 });
+</script>
 ```
+
+The Geocodio API supports `CORS` using the `Access-Control-Allow-Origin` *HTTP* header. This means that you will be able to make requests directly to the API using JavaScript.
+
+See an example to the right.
+
+<aside class="notice">
+**Note:** This will expose your API Key publicly, make sure that you understand and accept the implications of this approach.
+</aside>
 
 # Contact & Support
 Have any questions? Feel free to tweet us [@Geocodio](http://twitter.com/Geocodio) or shoot us an email [support@geocod.io](mailto:support@geocod.io).

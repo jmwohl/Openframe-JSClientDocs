@@ -30,6 +30,8 @@ Note the versioning prefix in the base url, which is required for all requests.
 
 Thanks to the great community we have language bindings for Ruby, Python, PHP, Perl, Node.js and Clojure.
 
+Basic examples for various languages are provided here, but please make sure to check out the full documentation for the individual libraries, linked below.
+
 <table class="table">
   <tbody><tr>
     <th>Platform</th>
@@ -826,7 +828,7 @@ Note: Address parsing is free of charge and does not count towards your API usag
 > To parse an address:
 
 ```shell
-curl http://api.geocod.io/v1/parse?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&api_key=YOUR_API_KEY
+curl "http://api.geocod.io/v1/parse?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&api_key=YOUR_API_KEY"
 ```
 
 ```ruby

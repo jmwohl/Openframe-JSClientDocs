@@ -228,7 +228,7 @@ geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', function(err, locatio
       "city": "Rancho Mirage",
       "state": "CA"
     },
-    "formatted_address": "42370 Bob Hope Dr, Rancho Mirage CA"
+    "formatted_address": "42370 Bob Hope Dr, Rancho Mirage, CA"
   },
   "results": [
     {
@@ -237,10 +237,11 @@ geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', function(err, locatio
         "street": "Bob Hope",
         "suffix": "Dr",
         "city": "Rancho Mirage",
+        "county": "Riverside County",
         "state": "CA",
         "zip": "92270"
       },
-      "formatted_address": "42370 Bob Hope Dr, Rancho Mirage CA, 92270",
+      "formatted_address": "42370 Bob Hope Dr, Rancho Mirage, CA 92270",
       "location": {
         "lat": 33.738987255507,
         "lng": -116.40833849559
@@ -253,10 +254,11 @@ geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', function(err, locatio
         "street": "Bob Hope",
         "suffix": "Dr",
         "city": "Rancho Mirage",
+        "county": "Riverside County",
         "state": "CA",
         "zip": "92270"
       },
-      "formatted_address": "42370 Bob Hope Dr, Rancho Mirage CA, 92270",
+      "formatted_address": "42370 Bob Hope Dr, Rancho Mirage, CA 92270",
       "location": {
         "lat": 33.738980796909,
         "lng": -116.40833917329
@@ -388,6 +390,7 @@ geocodio.geocode(addresses, function(err, locations) {
               "street": "Bob Hope",
               "suffix": "Dr",
               "city": "Rancho Mirage",
+              "county": "Riverside County",
               "state": "CA",
               "zip": "92270"
             },
@@ -404,6 +407,7 @@ geocodio.geocode(addresses, function(err, locations) {
               "street": "Bob Hope",
               "suffix": "Dr",
               "city": "Rancho Mirage",
+              "county": "Riverside County",
               "state": "CA",
               "zip": "92270"
             },
@@ -527,6 +531,7 @@ geocodio.reverse('38.9002898,-76.9990361', function(err, addresses) {
         "suffix": "St",
         "postdirectional": "NE",
         "city": "Washington",
+        "county": "District of Columbia",
         "state": "DC",
         "zip": "20002"
       },
@@ -544,6 +549,7 @@ geocodio.reverse('38.9002898,-76.9990361', function(err, addresses) {
         "suffix": "St",
         "postdirectional": "NE",
         "city": "Washington",
+        "county": "District of Columbia",
         "state": "DC",
         "zip": "20002"
       },
@@ -561,6 +567,7 @@ geocodio.reverse('38.9002898,-76.9990361', function(err, addresses) {
         "suffix": "St",
         "postdirectional": "NE",
         "city": "Washington",
+        "county": "District of Columbia",
         "state": "DC",
         "zip": "20002"
       },
@@ -674,20 +681,37 @@ geocodio.reverse(coordinates, function(err, address_sets){
         "results": [
           {
             "address_components": {
-              "number": "125",
-              "predirectional": "S",
-              "street": "Alston",
-              "suffix": "St",
-              "city": "Taylor Crossroads",
+              "number": "101",
+              "street": "State Hwy 58",
+              "city": "Nashville",
+              "county": "Nash County",
               "state": "NC",
               "zip": "27856"
             },
-            "formatted_address": "125 S Alston St, Taylor Crossroads, NC 27856",
+            "formatted_address": "101 State Hwy 58, Nashville, NC 27856",
             "location": {
-              "lat": 35.974263,
-              "lng": -77.965823
+              "lat": 35.974536,
+              "lng": -77.965716
             },
             "accuracy": 1
+          },
+          {
+            "address_components": {
+              "number": "100",
+              "predirectional": "N",
+              "street": "Alston",
+              "suffix": "St",
+              "city": "Nashville",
+              "county": "Nash County",
+              "state": "NC",
+              "zip": "27856"
+            },
+            "formatted_address": "100 N Alston St, Nashville, NC 27856",
+            "location": {
+              "lat": 35.974536,
+              "lng": -77.965716
+            },
+            "accuracy": 0.37
           },
           {
             "address_components": {
@@ -695,16 +719,17 @@ geocodio.reverse(coordinates, function(err, address_sets){
               "predirectional": "E",
               "street": "Washington",
               "suffix": "St",
-              "city": "Taylor Crossroads",
+              "city": "Nashville",
+              "county": "Nash County",
               "state": "NC",
               "zip": "27856"
             },
-            "formatted_address": "126 E Washington St, Taylor Crossroads, NC 27856",
+            "formatted_address": "126 E Washington St, Nashville, NC 27856",
             "location": {
               "lat": 35.974456,
               "lng": -77.965429
             },
-            "accuracy": 1
+            "accuracy": 0.36
           }
         ]
       }
@@ -719,11 +744,12 @@ geocodio.reverse(coordinates, function(err, address_sets){
               "predirectional": "E",
               "street": "Kingsley",
               "suffix": "Rd",
-              "city": "Centerville",
+              "city": "Garland",
+              "county": "Dallas County",
               "state": "TX",
               "zip": "75041"
             },
-            "formatted_address": "100 E Kingsley Rd, Centerville, TX 75041",
+            "formatted_address": "100 E Kingsley Rd, Garland, TX 75041",
             "location": {
               "lat": 32.878693,
               "lng": -96.630918
@@ -736,11 +762,12 @@ geocodio.reverse(coordinates, function(err, address_sets){
               "predirectional": "S",
               "street": "1st",
               "suffix": "St",
-              "city": "Centerville",
+              "city": "Garland",
+              "county": "Dallas County",
               "state": "TX",
               "zip": "75041"
             },
-            "formatted_address": "2961 S 1st St, Centerville, TX 75041",
+            "formatted_address": "2961 S 1st St, Garland, TX 75041",
             "location": {
               "lat": 32.881541,
               "lng": -96.630962
@@ -753,11 +780,12 @@ geocodio.reverse(coordinates, function(err, address_sets){
               "predirectional": "S",
               "street": "1st",
               "suffix": "St",
-              "city": "Centerville",
+              "city": "Garland",
+              "county": "Dallas County",
               "state": "TX",
               "zip": "75041"
             },
-            "formatted_address": "3084 S 1st St, Centerville, TX 75041",
+            "formatted_address": "3084 S 1st St, Garland, TX 75041",
             "location": {
               "lat": 32.878897,
               "lng": -96.630992
@@ -767,36 +795,7 @@ geocodio.reverse(coordinates, function(err, address_sets){
         ]
       }
     },
-    {
-      "query": "33.8337100,-117.8362320",
-      "response": {
-        "results": [
-          {
-            "address_components": {
-              "number": "2700",
-              "predirectional": "N",
-              "street": "Tustin",
-              "suffix": "St",
-              "city": "O`range`",
-              "state": "CA",
-              "zip": "92865"
-            },
-            "formatted_address": "2700 N Tustin St, O`range`, CA 92865",
-            "location": {
-              "lat": 33.832923,
-              "lng": -117.836211
-            },
-            "accuracy": 1
-          }
-        ]
-      }
-    },
-    {
-      "query": "35.4171240,-80.6784760",
-      "response": {
-        "results": []
-      }
-    }
+    ...
   ]
 }
 ```

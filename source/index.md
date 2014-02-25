@@ -360,7 +360,7 @@ geocodio.geocode(addresses, function(err, locations) {
 
 ;; You can set the API key in the GEOCODIO_API_KEY environment variable
 
-(batch ["42370 Bob Hope Drive, Rancho Mirage CA", "1290 Northbrook Court Mall, Northbrook IL", "4410 S Highway 17 92, Casselberry FL", "15000 NE 24th Street, Redmond WA", "17015 Walnut Grove Drive, Morgan Hill CA"])
+(batch ["42370 Bob Hope Drive, Rancho Mirage CA" "1290 Northbrook Court Mall, Northbrook IL" "4410 S Highway 17 92, Casselberry FL" "15000 NE 24th Street, Redmond WA" "17015 Walnut Grove Drive, Morgan Hill CA"])
 ```
 
 > Example response:
@@ -660,7 +660,7 @@ geocodio.reverse(coordinates, function(err, address_sets){
 
 ;; You can set the API key in the GEOCODIO_API_KEY environment variable
 
-(batch-reverse ["35.9746000,-77.9658000", "32.8793700,-96.6303900", "33.8337100,-117.8362320", "35.4171240,-80.6784760"])
+(batch-reverse ["35.9746000,-77.9658000" "32.8793700,-96.6303900" "33.8337100,-117.8362320" "35.4171240,-80.6784760"])
 ```
 
 > Example response:

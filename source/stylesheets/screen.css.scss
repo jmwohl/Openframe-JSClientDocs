@@ -52,7 +52,7 @@ html, body {
   font-weight: bold;
 
   // This is the logo at the top of the ToC
-  &>img {
+  & > a >img {
     display: block;
     margin-bottom: $logo-margin;
     width: $nav-width;

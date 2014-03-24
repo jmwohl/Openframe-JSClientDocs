@@ -200,7 +200,7 @@ var config = {
 
 var geocodio = new Geocodio(config);
 
-geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', function(err, location){
+geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', function(err, location) {
     if (err) throw err;
 
     console.log(location);
@@ -817,6 +817,278 @@ You can batch reverse geocode up to 10,000 coordinates at the time.
 Parameter | Description
 --------- | -----------
 api_key | Your Geocodio API key
+
+# Fields
+
+> To get the congressional district and stage legislative districts for an address:
+
+```shell
+curl "http://api.geocod.io/v1/geocode?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&fields=cd,stateleg&api_key=YOUR_API_KEY"
+```
+
+```ruby
+require 'geocodio'
+
+geocodio = Geocodio::Client.new('YOUR_API_KEY')
+
+location = geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', ['cd', 'stateleg'])
+```
+
+```python
+from geocodio import GeocodioClient
+
+client = GeocodioClient(YOUR_API_KEY)
+
+location = client.geocode("42370 Bob Hope Drive, Rancho Mirage CA", ["cd", "stateleg")
+```
+
+```php
+<?php
+require_once 'vendor/autoload.php'
+use Stanley\Geocodio\Client;
+
+// Create the new Client object by passing in your api key
+$client = new Client('YOUR_API_KEY');
+
+$location = $client->get('42370 Bob Hope Drive, Rancho Mirage CA', ['cd', 'stateleg']);
+```
+
+```javascript
+var Geocodio = require('geocodio');
+
+var config = {
+    api_key: 'YOUR_API_KEY'
+}
+
+var geocodio = new Geocodio(config);
+
+geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', ['cd', 'stateleg'], function(err, location) {
+    if (err) throw err;
+
+    console.log(location);
+});
+```
+
+```clojure
+(ns my.ns
+  (:require [rodeo.core :refer :all]))
+
+;; You can set the API key in the GEOCODIO_API_KEY environment variable
+
+(single "42370 Bob Hope Drive, Rancho Mirage CA" ["cd" "stateleg"])
+```
+
+> Example response:
+
+```json
+{
+  "input": {
+    "address_components": {
+      "number": "725",
+      "street": "8th",
+      "suffix": "St",
+      "postdirectional": "SE",
+      "zip": "20003"
+    },
+    "formatted_address": "725 8th St SE, 20003"
+  },
+  "results": [
+    {
+      "address_components": {
+        "number": "725",
+        "street": "8th",
+        "suffix": "St",
+        "postdirectional": "SE",
+        "city": "Washington",
+        "county": "District of Columbia",
+        "state": "DC",
+        "zip": "20003"
+      },
+      "formatted_address": "725 8th St SE, Washington, DC 20003",
+      "location": {
+        "lat": 38.879524484848,
+        "lng": -76.994975
+      },
+      "accuracy": 1,
+      "fields": {
+        "congressional_district": {
+          "name": "Delegate District (at Large)",
+          "district_number": 98,
+          "congress_number": "113th",
+          "congress_years": "2013-2015"
+        },
+        "state_legislative_districts": {
+          "senate": {
+            "name": "Ward 6",
+            "district_number": 6
+          }
+        }
+      }
+    },
+    {
+      "address_components": {
+        "number": "725",
+        "street": "8th",
+        "suffix": "St",
+        "postdirectional": "SE",
+        "city": "Washington",
+        "county": "District of Columbia",
+        "state": "DC",
+        "zip": "20003"
+      },
+      "formatted_address": "725 8th St SE, Washington, DC 20003",
+      "location": {
+        "lat": 38.879534505051,
+        "lng": -76.994975
+      },
+      "accuracy": 0.8,
+      "fields": {
+        "congressional_district": {
+          "name": "Delegate District (at Large)",
+          "district_number": 98,
+          "congress_number": "113th",
+          "congress_years": "2013-2015"
+        },
+        "state_legislative_districts": {
+          "senate": {
+            "name": "Ward 6",
+            "district_number": 6
+          }
+        }
+      }
+    }
+  ]
+}
+```
+
+Geocodio allows you to request additional information with forward and reverse geocoding requests, we call these *fields*.
+
+Requesting fields are easy, just add a `fields` parameter to your query string and set the value according to the table below. If you want multiple fields, just separate them with a comma. If the `fields` parameter has been specified, a new `fields` key is exposed with each geocoding result containing all necessary data for each field.
+
+Go ahead, <a href="http://api.geocod.io/v1/geocode?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&fields=cd&api_key=YOUR_API_KEY" target="_blank">try this in your browser right now</a>.
+
+Parameter name | Description
+-------------- | -----------------------------------------------------------
+cd *or* cd113  | Congressional District for the current congress (or the 113th congress)
+stateleg       | State Legislative District (House & Senate)
+school         | School District (elementary/secondary or unified)
+timezone       | Timezone
+
+
+<aside class="notice">
+Fields works both with single and batch geocoding.
+</aside>
+
+## Congressional Districts
+```json
+...
+"fields": {
+  "congressional_district": {
+    "name": "Congressional District 36",
+    "district_number": 36,
+    "congress_number": "113th",
+    "congress_years": "2013-2015"
+  }
+}
+...
+```
+You can retreive the congressional district for an address or coordinate using `cd` or `cd113` in the `fields` query parameter. `cd` will always return the congressional district for the current progress while `cd113` will continue to show the congressional district for the 113th congress even after the 114th congress has started (in 2015).
+
+The field returns the full name of the congressional district, the district number the congress number and the range of years the congress are covering.
+
+## State Legislative Districts
+```json
+...
+"fields": {
+  "state_legislative_districts": {
+    "house": {
+      "name": "Assembly District 42",
+      "district_number": 42
+    },
+    "senate": {
+      "name": "State Senate District 28",
+      "district_number": 28
+    }
+  }
+}
+...
+```
+You can retreive the state legislative districts for an address or coordinate using `stateleg` in the `fields` query parameter.
+
+The field will return both the *house* and *senate* state legislative district (also known as *lower* and *upper*) with the full name and district numbe for each. For areas with a [unicameral legislature](http://en.wikipedia.org/wiki/Unicameralism) (such as Washington DC or Nebraska), only the `senate` key is returned.
+
+## School Districts
+> Unified school district example
+
+```json
+...
+"fields": {
+  "school_districts": {
+    "unified": {
+      "name": "Desert Sands Unified School District",
+      "lea_code": "11110",
+      "grade_low": "KG",
+      "grade_high": "12"
+    }
+  },
+}
+...
+```
+
+> Elementary/Secondary school districts example
+
+```json
+...
+"fields": {
+  "school_districts": {
+      "elementary": {
+        "name": "Topsfield School District",
+        "lea_code": "11670",
+        "grade_low": "PK",
+        "grade_high": "06"
+      },
+      "secondary": {
+        "name": "Masconomet School District",
+        "lea_code": "07410",
+        "grade_low": "07",
+        "grade_high": "12"
+      }
+    }
+  }
+}
+...
+```
+You can retreive the school districts for an address or coordinate using `school` in the `fields` query parameter.
+
+The field will return either a *unified* school district or separate *elementary* and *secondary* fields depending on the area. Each school district is returned with its full name, the LEA (Local Education Agency) code as well as the grades supported. Kindergarden is abbreviated as *KG* and Pre-kindergarten is abbreviated as *PK*.
+
+## Timezone
+```json
+...
+"fields": {
+  "timezone": {
+    "name": "EST",
+    "utc_offset": -5,
+    "observes_dst": true
+  }
+}
+...
+```
+You can retreive the timezone for an address or coordinate using `stateleg` in the `fields` query parameter.
+
+The field will return the name of the timezone as a three letter abbreviation (see table below), the UTC/GMT offset and whether the location observes daylight savings time (DST).
+
+Abbreviation | Description
+------------ | -----------------------------------------------------------
+AKST         | Alaska Standard Time
+AST          | Atlantic Standard Time
+ChST         | Chamorro Standard Time
+CST          | Central Standard Time
+EST          | Eastern Standard Time
+HAST         | Hawaii-Aleutian Standard Time
+MST          | Mountain Standard Time
+PST          | Pacific Standard Time
+SST          | Samoa Standard Time
 
 # Address parsing
 

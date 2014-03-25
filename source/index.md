@@ -1074,7 +1074,7 @@ The field will return either a *unified* school district or separate *elementary
 }
 ...
 ```
-You can retreive the timezone for an address or coordinate using `stateleg` in the `fields` query parameter.
+You can retreive the timezone for an address or coordinate using `timezone` in the `fields` query parameter.
 
 The field will return the name of the timezone as a three letter abbreviation (see table below), the UTC/GMT offset and whether the location observes daylight savings time (DST).
 

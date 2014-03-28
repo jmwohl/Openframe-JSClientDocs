@@ -149,7 +149,7 @@ Geocoding (also known as forward geocoding) allows you to convert one or more ad
 Geocodio supports geocoding of addresses, cities and zip codes in various formats.
 
 <aside class="notice">
-Make sure to check the [address formats](#toc_21) section for more information on the different address formats supported.
+Make sure to check the [address formats](#toc_26) section for more information on the different address formats supported.
 </aside>
 
 You can either geocode a single address at a time or collect multiple addresses in batches in order to geocode up to 10,000 addresses at the time. Whenever possible, please make batch requests.
@@ -452,7 +452,7 @@ Geocodio will find matching street(s) and determine the correct house number bas
 
 As with forward geocoding, you can either geocode a single set of coordinates at the time or collect multiple coordinates in batches and reverse geocode up to 10,000 coordinates at the time.
 
-This endpoint can return up to 5 possible matches ranked and ordered by an [accuracy score](#toc_20).
+This endpoint can return up to 5 possible matches ranked and ordered by an [accuracy score](#toc_25).
 
 <aside class="success">
 A geographic coordinate consists of latitude followed by latitude separated by a comma, e.g. `38.9002898,-76.9990361`
@@ -1187,7 +1187,7 @@ q | The query (i.e. address) to parse
 api_key | Your Geocodio API key
 
 <aside class="notice">
-Make sure to check the [address formatting](#toc_20) section for more information on the different address formats supported.
+Make sure to check the [address formatting](#toc_26) section for more information on the different address formats supported.
 </aside>
 
 # Accuracy score

@@ -992,7 +992,7 @@ Fields works both with single and batch geocoding.
 }
 ...
 ```
-You can retreive the congressional district for an address or coordinate using `cd` or `cd113` in the `fields` query parameter. `cd` will always return the congressional district for the current progress while `cd113` will continue to show the congressional district for the 113th congress even after the 114th congress has started (in 2015).
+You can retrieve the congressional district for an address or coordinate using `cd` or `cd113` in the `fields` query parameter. `cd` will always return the congressional district for the current progress while `cd113` will continue to show the congressional district for the 113th congress even after the 114th congress has started (in 2015).
 
 The field returns the full name of the congressional district, the district number the congress number and the range of years the congress are covering.
 
@@ -1017,7 +1017,7 @@ It might be tempting to look congressional districts up by zip code, but this is
 }
 ...
 ```
-You can retreive the state legislative districts for an address or coordinate using `stateleg` in the `fields` query parameter.
+You can retrieve the state legislative districts for an address or coordinate using `stateleg` in the `fields` query parameter.
 
 The field will return both the *house* and *senate* state legislative district (also known as *lower* and *upper*) with the full name and district numbe for each. For areas with a [unicameral legislature](http://en.wikipedia.org/wiki/Unicameralism) (such as Washington DC or Nebraska), only the `senate` key is returned.
 
@@ -1062,7 +1062,7 @@ The field will return both the *house* and *senate* state legislative district (
 }
 ...
 ```
-You can retreive the school districts for an address or coordinate using `school` in the `fields` query parameter.
+You can retrieve the school districts for an address or coordinate using `school` in the `fields` query parameter.
 
 The field will return either a *unified* school district or separate *elementary* and *secondary* fields depending on the area. Each school district is returned with its full name, the LEA (Local Education Agency) code as well as the grades supported. Kindergarden is abbreviated as *KG* and Pre-kindergarten is abbreviated as *PK*.
 
@@ -1078,7 +1078,7 @@ The field will return either a *unified* school district or separate *elementary
 }
 ...
 ```
-You can retreive the timezone for an address or coordinate using `timezone` in the `fields` query parameter.
+You can retrieve the timezone for an address or coordinate using `timezone` in the `fields` query parameter.
 
 The field will return the name of the timezone as a three letter abbreviation (see table below), the UTC/GMT offset and whether the location observes daylight savings time (DST).
 

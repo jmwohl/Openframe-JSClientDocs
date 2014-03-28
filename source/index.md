@@ -996,6 +996,10 @@ You can retreive the congressional district for an address or coordinate using `
 
 The field returns the full name of the congressional district, the district number the congress number and the range of years the congress are covering.
 
+<aside class="warning">
+It might be tempting to look congressional districts up by zip code, but this is discouraged &mdash; primarily because zip codes are postal routes and not areas which can cause imprecise results. Also note that some zip codes span over multiple congressional districts and Geocodio will only return one district per result.
+</aside>
+
 ## State Legislative Districts
 ```json
 ...

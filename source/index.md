@@ -130,6 +130,7 @@ var geocodio = new Geocodio(config);
   (:require [rodeo.core :refer :all]))
 
 ;; You can set the API key in the GEOCODIO_API_KEY environment variable
+;; or with each request using the :api_key parameter
 ```
 
 All requests require an API key. You can [register here](https://dash.geocod.io) to get your own API key.
@@ -211,9 +212,7 @@ geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', function(err, locatio
 (ns my.ns
   (:require [rodeo.core :refer :all]))
 
-;; You can set the API key in the GEOCODIO_API_KEY environment variable
-
-(single "42370 Bob Hope Drive, Rancho Mirage CA")
+(single "42370 Bob Hope Drive, Rancho Mirage CA" :api_key "YOUR_API_KEY")
 ```
 
 > Example response:
@@ -362,7 +361,7 @@ geocodio.geocode(addresses, function(err, locations) {
 
 ;; You can set the API key in the GEOCODIO_API_KEY environment variable
 
-(batch ["42370 Bob Hope Drive, Rancho Mirage CA" "1290 Northbrook Court Mall, Northbrook IL" "4410 S Highway 17 92, Casselberry FL" "15000 NE 24th Street, Redmond WA" "17015 Walnut Grove Drive, Morgan Hill CA"])
+(batch ["42370 Bob Hope Drive, Rancho Mirage CA" "1290 Northbrook Court Mall, Northbrook IL" "4410 S Highway 17 92, Casselberry FL" "15000 NE 24th Street, Redmond WA" "17015 Walnut Grove Drive, Morgan Hill CA"] :api_key "YOUR_API_KEY")
 ```
 
 > Example response:
@@ -514,9 +513,7 @@ geocodio.reverse('38.9002898,-76.9990361', function(err, addresses) {
 (ns my.ns
   (:require [rodeo.core :refer :all]))
 
-;; You can set the API key in the GEOCODIO_API_KEY environment variable
-
-(single-reverse "38.9002898,-76.9990361")
+(single-reverse "38.9002898,-76.9990361" :api_key "YOUR_API_KEY")
 ```
 
 > Example response:
@@ -665,9 +662,7 @@ geocodio.reverse(coordinates, function(err, address_sets){
 (ns my.ns
   (:require [rodeo.core :refer :all]))
 
-;; You can set the API key in the GEOCODIO_API_KEY environment variable
-
-(batch-reverse ["35.9746000,-77.9658000" "32.8793700,-96.6303900" "33.8337100,-117.8362320" "35.4171240,-80.6784760"])
+(batch-reverse ["35.9746000,-77.9658000" "32.8793700,-96.6303900" "33.8337100,-117.8362320" "35.4171240,-80.6784760"] :api-key "YOUR_API_KEY")
 ```
 
 > Example response:
@@ -873,9 +868,7 @@ geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', ['cd', 'stateleg'], f
 (ns my.ns
   (:require [rodeo.core :refer :all]))
 
-;; You can set the API key in the GEOCODIO_API_KEY environment variable
-
-(single "42370 Bob Hope Drive, Rancho Mirage CA" ["cd" "stateleg"])
+(single "42370 Bob Hope Drive, Rancho Mirage CA" :api_key "YOUR_API_KEY" :fields ["cd" "stateleg"])
 ```
 
 > Example response:
@@ -884,75 +877,81 @@ geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', ['cd', 'stateleg'], f
 {
   "input": {
     "address_components": {
-      "number": "725",
-      "street": "8th",
-      "suffix": "St",
-      "postdirectional": "SE",
-      "zip": "20003"
+      "number": "42370",
+      "street": "Bob Hope",
+      "suffix": "Dr",
+      "city": "Rancho Mirage",
+      "state": "CA"
     },
-    "formatted_address": "725 8th St SE, 20003"
+    "formatted_address": "42370 Bob Hope Dr, Rancho Mirage, CA"
   },
   "results": [
     {
       "address_components": {
-        "number": "725",
-        "street": "8th",
-        "suffix": "St",
-        "postdirectional": "SE",
-        "city": "Washington",
-        "county": "District of Columbia",
-        "state": "DC",
-        "zip": "20003"
+        "number": "42370",
+        "street": "Bob Hope",
+        "suffix": "Dr",
+        "city": "Rancho Mirage",
+        "county": "Riverside County",
+        "state": "CA",
+        "zip": "92270"
       },
-      "formatted_address": "725 8th St SE, Washington, DC 20003",
+      "formatted_address": "42370 Bob Hope Dr, Rancho Mirage, CA 92270",
       "location": {
-        "lat": 38.879524484848,
-        "lng": -76.994975
+        "lat": 33.738987255507,
+        "lng": -116.40833849559
       },
       "accuracy": 1,
       "fields": {
         "congressional_district": {
-          "name": "Delegate District (at Large)",
-          "district_number": 98,
+          "name": "Congressional District 36",
+          "district_number": 36,
           "congress_number": "113th",
           "congress_years": "2013-2015"
         },
         "state_legislative_districts": {
+          "house": {
+            "name": "Assembly District 42",
+            "district_number": 42
+          },
           "senate": {
-            "name": "Ward 6",
-            "district_number": 6
+            "name": "State Senate District 28",
+            "district_number": 28
           }
         }
       }
     },
     {
       "address_components": {
-        "number": "725",
-        "street": "8th",
-        "suffix": "St",
-        "postdirectional": "SE",
-        "city": "Washington",
-        "county": "District of Columbia",
-        "state": "DC",
-        "zip": "20003"
+        "number": "42370",
+        "street": "Bob Hope",
+        "suffix": "Dr",
+        "city": "Rancho Mirage",
+        "county": "Riverside County",
+        "state": "CA",
+        "zip": "92270"
       },
-      "formatted_address": "725 8th St SE, Washington, DC 20003",
+      "formatted_address": "42370 Bob Hope Dr, Rancho Mirage, CA 92270",
       "location": {
-        "lat": 38.879534505051,
-        "lng": -76.994975
+        "lat": 33.738980796909,
+        "lng": -116.40833917329
       },
       "accuracy": 0.8,
       "fields": {
         "congressional_district": {
-          "name": "Delegate District (at Large)",
-          "district_number": 98,
+          "name": "Congressional District 36",
+          "district_number": 36,
           "congress_number": "113th",
           "congress_years": "2013-2015"
         },
         "state_legislative_districts": {
+          "house": {
+            "name": "Assembly District 42",
+            "district_number": 42
+          },
           "senate": {
-            "name": "Ward 6",
-            "district_number": 6
+            "name": "State Senate District 28",
+            "district_number": 28
           }
         }
       }
@@ -1155,9 +1154,7 @@ geocodio.parse('42370 Bob Hope Drive, Rancho Mirage CA', function(err, address) 
 (ns my.ns
   (:require [rodeo.core :refer :all]))
 
-;; You can set the API key in the GEOCODIO_API_KEY environment variable
-
-(components "42370 Bob Hope Dr, Rancho Mirage CA")
+(components "42370 Bob Hope Dr, Rancho Mirage CA" :api_key "YOUR_API_KEY")
 ```
 
 > Example response:

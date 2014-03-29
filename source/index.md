@@ -170,7 +170,7 @@ require 'geocodio'
 
 geocodio = Geocodio::Client.new('YOUR_API_KEY')
 
-location = geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA')
+location = geocodio.geocode(['42370 Bob Hope Drive, Rancho Mirage CA'])
 ```
 
 ```python
@@ -295,7 +295,7 @@ require 'geocodio'
 
 geocodio = Geocodio::Client.new('YOUR_API_KEY')
 
-locations = geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', '1290 Northbrook Court Mall, Northbrook IL', '4410 S Highway 17 92, Casselberry FL', '15000 NE 24th Street, Redmond WA', '17015 Walnut Grove Drive, Morgan Hill CA')
+locations = geocodio.geocode(['42370 Bob Hope Drive, Rancho Mirage CA', '1290 Northbrook Court Mall, Northbrook IL', '4410 S Highway 17 92, Casselberry FL', '15000 NE 24th Street, Redmond WA', '17015 Walnut Grove Drive, Morgan Hill CA'])
 
 ```
 
@@ -470,7 +470,7 @@ require 'geocodio'
 
 geocodio = Geocodio::Client.new('YOUR_API_KEY')
 
-addresses = geocodio.reverse_geocode('38.9002898,-76.9990361')
+addresses = geocodio.reverse_geocode(['38.9002898,-76.9990361'])
 ```
 
 ```python
@@ -608,7 +608,7 @@ require 'geocodio'
 
 geocodio = Geocodio::Client.new('YOUR_API_KEY')
 
-address_sets = geocodio.reverse_geocode('35.9746000,-77.9658000', '32.8793700,-96.6303900', '33.8337100,-117.8362320', '35.4171240,-80.6784760')
+address_sets = geocodio.reverse_geocode(['35.9746000,-77.9658000', '32.8793700,-96.6303900', '33.8337100,-117.8362320', '35.4171240,-80.6784760'])
 ```
 
 ```python
@@ -826,7 +826,7 @@ require 'geocodio'
 
 geocodio = Geocodio::Client.new('YOUR_API_KEY')
 
-location = geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', ['cd', 'stateleg'])
+location = geocodio.geocode(['42370 Bob Hope Drive, Rancho Mirage CA'], :fields %w[cd stateleg])
 ```
 
 ```python
@@ -834,7 +834,7 @@ from geocodio import GeocodioClient
 
 client = GeocodioClient(YOUR_API_KEY)
 
-location = client.geocode("42370 Bob Hope Drive, Rancho Mirage CA", ["cd", "stateleg")
+location = client.geocode("42370 Bob Hope Drive, Rancho Mirage CA", ["cd", "stateleg"])
 ```
 
 ```php

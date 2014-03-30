@@ -849,6 +849,10 @@ $location = $client->get('42370 Bob Hope Drive, Rancho Mirage CA', ['cd', 'state
 ```
 
 ```javascript
+// There is no Node.js support for fields yet. Feel free to contribute
+// by creating a pull request on GitHub
+
+/*
 var Geocodio = require('geocodio');
 
 var config = {
@@ -862,6 +866,7 @@ geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', ['cd', 'stateleg'], f
 
     console.log(location);
 });
+*/
 ```
 
 ```clojure

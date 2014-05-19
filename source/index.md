@@ -1199,6 +1199,16 @@ For example, if against all odds an address simply can't be found — instead of
 
 Results are always returned ordered by accuracy score.
 
+Generally the accuracy score can be mapped as following:
+
+Value   | Description
+------- | -----------
+>= 1.0  | Exact match
+>= 0.8  | Match to street
+>= 0.6  | Match to neighborhood
+>= 0.5  | Match to city
+< 0.5   | Generally only used for second or third choice results
+
 # Address formats
 Geocodio allows you to geocode addresses, cities or zip codes. A street address needs to have either a zip OR a city/state combination. If a city is provided without a state, Geocodio will automatically guess and add the state based on what it most likely might be. Geocodio also understands shorthands for both streets and cities, e.g. *NYC*, *SF*, etc. are acceptable city names.
 

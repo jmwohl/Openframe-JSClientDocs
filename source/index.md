@@ -22,7 +22,7 @@ Geocodio is a geocoding and reverse geocoding service that aims to fill a void i
 
 Our pricing structure is simple: you get the first 2,500 queries per day for free and after that you are charged $0.001 per query (yep, that's $1 per 1,000 geocoding queries). This applies to all users.
 
-We provide a simple RESTful API, with a base url at `http://api.geocod.io/v1/`.
+We provide a simple RESTful API, with a base url at `https://api.geocod.io/v1/` (You can also use Geocodio over plain HTTP at `http://api.geocod.io/v1/`, but it's not recommended).
 
 <aside class="notice">
 Note the versioning prefix in the base url, which is required for all requests.
@@ -91,7 +91,7 @@ Basic examples for various languages are provided here. Please make sure to chec
 
 ```shell
 # With shell, you can just pass the query parameter with each request
-curl "http://api.geocod.io/v1/api_endpoint_here?api_key=YOUR_API_KEY"
+curl "https://api.geocod.io/v1/api_endpoint_here?api_key=YOUR_API_KEY"
 ```
 
 ```ruby
@@ -157,12 +157,12 @@ You can either geocode a single address at a time or collect multiple addresses 
 
 ## Geocoding single address
 
-A single address can be geocoded by making a simple `GET` request to the *geocode* endpoint, you can <a href="http://api.geocod.io/v1/geocode?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&api_key=YOUR_API_KEY" target="_blank">try this in your browser right now</a>.
+A single address can be geocoded by making a simple `GET` request to the *geocode* endpoint, you can <a href="https://api.geocod.io/v1/geocode?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&api_key=YOUR_API_KEY" target="_blank">try this in your browser right now</a>.
 
 > To geocode a single address:
 
 ```shell
-curl "http://api.geocod.io/v1/geocode?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&api_key=YOUR_API_KEY"
+curl "https://api.geocod.io/v1/geocode?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&api_key=YOUR_API_KEY"
 ```
 
 ```ruby
@@ -270,7 +270,7 @@ geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', function(err, locatio
 
 ### HTTP Request
 
-`GET http://api.geocod.io/v1/geocode`
+`GET https://api.geocod.io/v1/geocode`
 
 ### URL Parameters
 
@@ -287,7 +287,7 @@ api_key | Your Geocodio API key
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '["42370 Bob Hope Drive, Rancho Mirage CA", "1290 Northbrook Court Mall, Northbrook IL", "4410 S Highway 17 92, Casselberry FL", "15000 NE 24th Street, Redmond WA", "17015 Walnut Grove Drive, Morgan Hill CA"]' \
-  http://api.geocod.io/v1/geocode?api_key=YOUR_API_KEY
+  https://api.geocod.io/v1/geocode?api_key=YOUR_API_KEY
 ```
 
 ```ruby
@@ -435,7 +435,7 @@ You can batch geocode up to 10,000 addresses at the time.
 
 ### HTTP Request
 
-`POST http://api.geocod.io/v1/geocode`
+`POST https://api.geocod.io/v1/geocode`
 
 ### URL Parameters
 
@@ -462,7 +462,7 @@ A geographic coordinate consists of latitude followed by latitude separated by a
 > To reverse geocode a single coordinate:
 
 ```shell
-curl "http://api.geocod.io/v1/reverse?q=38.9002898,-76.9990361&api_key=YOUR_API_KEY"
+curl "https://api.geocod.io/v1/reverse?q=38.9002898,-76.9990361&api_key=YOUR_API_KEY"
 ```
 
 ```ruby
@@ -579,11 +579,11 @@ geocodio.reverse('38.9002898,-76.9990361', function(err, addresses) {
 }
 ```
 
-A single coordinate can be reverse geocoded by making a simple `GET` request to the *reverse* endpoint, you can <a href="http://api.geocod.io/v1/reverse?q=38.9002898,-76.9990361&api_key=YOUR_API_KEY" target="_blank">try this in your browser right now</a>.
+A single coordinate can be reverse geocoded by making a simple `GET` request to the *reverse* endpoint, you can <a href="https://api.geocod.io/v1/reverse?q=38.9002898,-76.9990361&api_key=YOUR_API_KEY" target="_blank">try this in your browser right now</a>.
 
 ### HTTP Request
 
-`GET http://api.geocod.io/v1/reverse`
+`GET https://api.geocod.io/v1/reverse`
 
 ### URL Parameters
 
@@ -600,7 +600,7 @@ api_key | Your Geocodio API key
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '["35.9746000,-77.9658000","32.8793700,-96.6303900","33.8337100,-117.8362320","35.4171240,-80.6784760"]' \
-  http://api.geocod.io/v1/reverse?api_key=YOUR_API_KEY
+  https://api.geocod.io/v1/reverse?api_key=YOUR_API_KEY
 ```
 
 ```ruby
@@ -805,7 +805,7 @@ You can batch reverse geocode up to 10,000 coordinates at the time.
 
 ### HTTP Request
 
-`POST http://api.geocod.io/v1/reverse`
+`POST https://api.geocod.io/v1/reverse`
 
 ### URL Parameters
 
@@ -818,7 +818,7 @@ api_key | Your Geocodio API key
 > To get the congressional district and stage legislative districts for an address:
 
 ```shell
-curl "http://api.geocod.io/v1/geocode?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&fields=cd,stateleg&api_key=YOUR_API_KEY"
+curl "https://api.geocod.io/v1/geocode?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&fields=cd,stateleg&api_key=YOUR_API_KEY"
 ```
 
 ```ruby
@@ -969,7 +969,7 @@ Geocodio allows you to request additional information with forward and reverse g
 
 Requesting fields are easy, just add a `fields` parameter to your query string and set the value according to the table below. If you want multiple fields, just separate them with a comma. If the `fields` parameter has been specified, a new `fields` key is exposed with each geocoding result containing all necessary data for each field.
 
-Go ahead, <a href="http://api.geocod.io/v1/geocode?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&fields=cd&api_key=YOUR_API_KEY" target="_blank">try this in your browser right now</a>.
+Go ahead, <a href="https://api.geocod.io/v1/geocode?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&fields=cd&api_key=YOUR_API_KEY" target="_blank">try this in your browser right now</a>.
 
 Parameter name | Description
 -------------- | -----------------------------------------------------------
@@ -1109,7 +1109,7 @@ Note: Address parsing is free of charge and does not count towards your API usag
 > To parse an address:
 
 ```shell
-curl "http://api.geocod.io/v1/parse?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&api_key=YOUR_API_KEY"
+curl "https://api.geocod.io/v1/parse?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&api_key=YOUR_API_KEY"
 ```
 
 ```ruby
@@ -1179,7 +1179,7 @@ geocodio.parse('42370 Bob Hope Drive, Rancho Mirage CA', function(err, address) 
 
 ### HTTP Request
 
-`GET http://api.geocod.io/v1/parse`
+`GET https://api.geocod.io/v1/parse`
 
 ### URL Parameters
 
@@ -1250,7 +1250,7 @@ Error Code | Meaning
 var address = '42370 Bob Hope Dr, Rancho Mirage CA',
     apiKey = 'YOUR_API_KEY';
 
-$.get('http://api.geocod.io/v1/geocode?q='+ encodeURIComponent(address) +'&api_key=' + encodeURIComponent(apiKey), function (response) {
+$.get('https://api.geocod.io/v1/geocode?q='+ encodeURIComponent(address) +'&api_key=' + encodeURIComponent(apiKey), function (response) {
   console.log(response.results);
 });
 </script>

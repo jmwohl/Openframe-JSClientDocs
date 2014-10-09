@@ -279,7 +279,8 @@ Parameter | Description
 q | The query (i.e. address) to geocode
 api_key | Your Geocodio API key
 
-### Alternative URL Parameters
+
+**Alternative URL Parameters**
 
 Instead of using the *q* parameter, you can use a combination of street, city, state and/or postal_code. This is useful if the address is already stored as separate fields in your end.
 

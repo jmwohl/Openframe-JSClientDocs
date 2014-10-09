@@ -162,7 +162,10 @@ A single address can be geocoded by making a simple `GET` request to the *geocod
 > To geocode a single address:
 
 ```shell
+# Using q parameter
 curl "https://api.geocod.io/v1/geocode?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&api_key=YOUR_API_KEY"
+
+# Using individual address components
 curl "https://api.geocod.io/v1/geocode?street=42370+Bob+Hope+Drive&city=Rancho+Mirage&state=CA&api_key=YOUR_API_KEY"
 ```
 
@@ -299,9 +302,16 @@ api_key | Your Geocodio API key
 > To perform batch geocoding:
 
 ```shell
+# Using JSON array
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '["42370 Bob Hope Drive, Rancho Mirage CA", "1290 Northbrook Court Mall, Northbrook IL", "4410 S Highway 17 92, Casselberry FL", "15000 NE 24th Street, Redmond WA", "17015 Walnut Grove Drive, Morgan Hill CA"]' \
+  https://api.geocod.io/v1/geocode?api_key=YOUR_API_KEY
+
+# Using JSON object
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{1: "42370 Bob Hope Drive, Rancho Mirage CA", 2: "1290 Northbrook Court Mall, Northbrook IL", 3: "4410 S Highway 17 92, Casselberry FL", 4: "15000 NE 24th Street, Redmond WA", 5: "17015 Walnut Grove Drive, Morgan Hill CA"}' \
   https://api.geocod.io/v1/geocode?api_key=YOUR_API_KEY
 ```
 
@@ -442,7 +452,7 @@ geocodio.geocode(addresses, function(err, locations) {
 
 If you have several addresses that you need to geocode, batch geocoding is a much faster options since it removes the overhead of having to perform multiple `HTTP` requests.
 
-Batch geocoding requests are performed by making a `POST` request to the *geocode* endpoint, suppliying a `JSON` array in the body.
+Batch geocoding requests are performed by making a `POST` request to the *geocode* endpoint, suppliying a `JSON` array in the body or a `JSON` object with any key of your choosing.
 
 <aside class="warning">
 You can batch geocode up to 10,000 addresses at the time.

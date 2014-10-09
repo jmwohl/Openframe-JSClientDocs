@@ -163,6 +163,7 @@ A single address can be geocoded by making a simple `GET` request to the *geocod
 
 ```shell
 curl "https://api.geocod.io/v1/geocode?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&api_key=YOUR_API_KEY"
+curl "https://api.geocod.io/v1/geocode?street=42370+Bob+Hope+Drive&city=Rancho+Mirage&state=CA&api_key=YOUR_API_KEY"
 ```
 
 ```ruby

@@ -279,6 +279,18 @@ Parameter | Description
 q | The query (i.e. address) to geocode
 api_key | Your Geocodio API key
 
+### Alternative URL Parameters
+
+Instead of using the *q* parameter, you can use a combination of street, city, state and/or postal_code. This is useful if the address is already stored as separate fields in your end.
+
+Parameter | Description
+--------- | -----------
+street | E.g. 1600 Pennsylvania Ave NW
+city | E.g. Washington (Can be omitted if zip code has been specified)
+state | E.g. DC (Can be omitted if zip code has been specified)
+postal_code | E.g. 20500 (Can be omitted if city or city/state has been specified)
+api_key | Your Geocodio API key
+
 ## Batch geocoding
 
 > To perform batch geocoding:

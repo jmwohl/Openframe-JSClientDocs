@@ -311,7 +311,7 @@ curl -X POST \
 # Using JSON object
 curl -X POST \
   -H "Content-Type: application/json" \
-  -d '{1: "42370 Bob Hope Drive, Rancho Mirage CA", 2: "1290 Northbrook Court Mall, Northbrook IL", 3: "4410 S Highway 17 92, Casselberry FL", 4: "15000 NE 24th Street, Redmond WA", 5: "17015 Walnut Grove Drive, Morgan Hill CA"}' \
+  -d '{"1": "42370 Bob Hope Drive, Rancho Mirage CA", "2": "1290 Northbrook Court Mall, Northbrook IL", "3": "4410 S Highway 17 92, Casselberry FL", "4": "15000 NE 24th Street, Redmond WA", "5": "17015 Walnut Grove Drive, Morgan Hill CA"}' \
   https://api.geocod.io/v1/geocode?api_key=YOUR_API_KEY
 ```
 

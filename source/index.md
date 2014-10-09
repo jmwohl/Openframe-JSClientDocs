@@ -279,6 +279,7 @@ Parameter | Description
 q | The query (i.e. address) to geocode
 api_key | Your Geocodio API key
 
+***
 
 **Alternative URL Parameters**
 

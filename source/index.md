@@ -936,7 +936,7 @@ geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', ['cd', 'stateleg'], f
         "congressional_district": {
           "name": "Congressional District 36",
           "district_number": 36,
-          "congress_number": "113th",
+          "congress_number": "114th",
           "congress_years": "2013-2015"
         },
         "state_legislative_districts": {
@@ -971,7 +971,7 @@ geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', ['cd', 'stateleg'], f
         "congressional_district": {
           "name": "Congressional District 36",
           "district_number": 36,
-          "congress_number": "113th",
+          "congress_number": "114th",
           "congress_years": "2013-2015"
         },
         "state_legislative_districts": {
@@ -996,12 +996,12 @@ Requesting fields are easy, just add a `fields` parameter to your query string a
 
 Go ahead, <a href="https://api.geocod.io/v1/geocode?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&fields=cd&api_key=YOUR_API_KEY" target="_blank">try this in your browser right now</a>.
 
-Parameter name | Description
--------------- | -----------------------------------------------------------
-cd *or* cd113  | Congressional District for the current congress (or the 113th congress)
-stateleg       | State Legislative District (House & Senate)
-school         | School District (elementary/secondary or unified)
-timezone       | Timezone
+Parameter name         | Description
+---------------------- | -----------------------------------------------------------
+cd, cd113, *or* cd114  | Congressional District for the current congress (or the 114th congress)
+stateleg               | State Legislative District (House & Senate)
+school                 | School District (elementary/secondary or unified)
+timezone               | Timezone
 
 
 <aside class="notice">
@@ -1015,13 +1015,13 @@ Fields works both with single and batch geocoding.
   "congressional_district": {
     "name": "Congressional District 36",
     "district_number": 36,
-    "congress_number": "113th",
+    "congress_number": "114th",
     "congress_years": "2013-2015"
   }
 }
 ...
 ```
-You can retrieve the congressional district for an address or coordinate using `cd` or `cd113` in the `fields` query parameter. `cd` will always return the congressional district for the current progress while `cd113` will continue to show the congressional district for the 113th congress even after the 114th congress has started (in 2015).
+You can retrieve the congressional district for an address or coordinate using `cd`, `cd113`, or `cd114` in the `fields` query parameter. `cd` will always return the congressional district for the current progress while `cd113` will continue to show the congressional district for the 113th congress.
 
 The field returns the full name of the congressional district, the district number the congress number and the range of years the congress are covering.
 

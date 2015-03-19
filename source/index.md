@@ -479,7 +479,7 @@ As with forward geocoding, you can either geocode a single set of coordinates at
 This endpoint can return up to 5 possible matches ranked and ordered by an [accuracy score](#toc_25).
 
 <aside class="success">
-A geographic coordinate consists of latitude followed by latitude separated by a comma, e.g. `38.9002898,-76.9990361`
+A geographic coordinate consists of latitude followed by longitude separated by a comma, e.g. `38.9002898,-76.9990361`
 </aside>
 
 ## Reverse geocoding single coordinate

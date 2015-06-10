@@ -297,21 +297,18 @@ state | E.g. DC (Can be omitted if zip code has been specified)
 postal_code | E.g. 20500 (Can be omitted if city or city/state has been specified)
 api_key | Your Geocodio API key
 
+<aside>
+**Note:** Even if the fields are supplied separately, Geocodio might in rare circumstances try to parse e.g. the street as part of the city if more relevant results can be found.
+</aside>
+
 ## Batch geocoding
 
 > To perform batch geocoding:
 
 ```shell
-# Using JSON array
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '["42370 Bob Hope Drive, Rancho Mirage CA", "1290 Northbrook Court Mall, Northbrook IL", "4410 S Highway 17 92, Casselberry FL", "15000 NE 24th Street, Redmond WA", "17015 Walnut Grove Drive, Morgan Hill CA"]' \
-  https://api.geocod.io/v1/geocode?api_key=YOUR_API_KEY
-
-# Using JSON object
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"1": "42370 Bob Hope Drive, Rancho Mirage CA", "2": "1290 Northbrook Court Mall, Northbrook IL", "3": "4410 S Highway 17 92, Casselberry FL", "4": "15000 NE 24th Street, Redmond WA", "5": "17015 Walnut Grove Drive, Morgan Hill CA"}' \
   https://api.geocod.io/v1/geocode?api_key=YOUR_API_KEY
 ```
 
@@ -467,6 +464,52 @@ You can batch geocode up to 10,000 addresses at the time.
 Parameter | Description
 --------- | -----------
 api_key | Your Geocodio API key
+
+### JSON array/object
+When making a batch geocoding request, you can `POST` queries as either a JSON array or a JSON object. If a JSON object is posted, you can specify a custom key for each element of your choice, this can be useful to match queries up with your existing data, after the request is complete.
+
+If using a JSON array, results are **guaranteed** to be returned in the same order as they are requested.
+
+You can also use the alternative parameters with batch geocoding, just pass an associative array instead of a string for each address.
+
+Here's a couple of examples of what the `POST` body can look like:
+
+### JSON array
+<pre class="inline">
+[
+  "42370 Bob Hope Drive, Rancho Mirage CA",
+  "1290 Northbrook Court Mall, Northbrook IL",
+  "4410 S Highway 17 92, Casselberry FL",
+  "15000 NE 24th Street, Redmond WA",
+  "17015 Walnut Grove Drive, Morgan Hill CA"
+]
+</pre>
+
+### JSON object
+<pre class="inline">
+{
+  "1": "42370 Bob Hope Drive, Rancho Mirage CA",
+  "2": "1290 Northbrook Court Mall, Northbrook IL",
+  "3": "4410 S Highway 17 92, Casselberry FL",
+  "4": "15000 NE 24th Street, Redmond WA",
+  "5": "17015 Walnut Grove Drive, Morgan Hill CA"
+}
+</pre>
+
+### JSON object with parameters
+<pre class="inline">
+{
+  "1": {
+    "street": "42370 Bob Hope Drive",
+    "city:" "Rancho Mirage",
+    "state" "CA"
+  }
+  "2": {
+    "city": "Northbrook",
+    "postal_code": 60062
+  }
+}
+</pre>
 
 # Reverse Geocoding
 

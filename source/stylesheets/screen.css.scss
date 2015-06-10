@@ -417,6 +417,12 @@ html, body {
       text-decoration: none;
       border-bottom: dashed 1px #ccc;
     }
+
+    &.inline {
+      background-color: lighten($code-bg, 5%);
+      float: none;
+      clear: none;
+    }
   }
 
   pre {

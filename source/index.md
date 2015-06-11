@@ -1168,7 +1168,15 @@ SST          | Samoa Standard Time
 
 # Address parsing
 
-If you just need to an address into individual components, Geocodio can help you too. 
+<aside class="warning">
+**DEPRECATED**
+
+As of June 2015 the parse endpoint has been deprecated in favor of the regular geocode endpoint that also provides address parsing. The parse endpoint is unsupported and will be completely removed in the future.
+</aside>
+
+If you just need to an address into individual components, Geocodio can help you too. The parse endpoint is however very simple and does not provide intelligent address correction and address completion.
+
+If you need these features we recommend that you use the regular geocoding endpoint and retrieve the parsed components from there.
 
 <aside class="notice">
 Note: Address parsing is free of charge and does not count towards your API usage. (You still need an API key, though.)

@@ -72,7 +72,7 @@ Basic examples for various languages are provided here. Please make sure to chec
   </tr>
   <tr>
     <td><strong>Clojure</strong></td>
-    <td><a href="https://github.com/jboverfelt/rodeo" target="_blank">jboverfelt/rodeo</a> by <a href="https://twitter.com/j_felt08" target="_blank">@j_felt08</a></td>
+    <td><a href="https://github.com/jboverfelt/rodeo" target="_blank">jboverfelt/rodeo</a> by <a href="https://twitter.com/jboverfelt" target="_blank">@jboverfelt</a></td>
     <td><i class="fa fa-check"></i></td>
   </tr>
   <tr>

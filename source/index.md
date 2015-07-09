@@ -511,6 +511,57 @@ Here's a couple of examples of what the `POST` body can look like:
 }
 </pre>
 
+## Geocoding intersections
+
+You can also geocode intersections, just specify the two streets that you want to geocode in your query. We support various formats, here's a few examples:
+
+* <a href="https://api.geocod.io/v1/geocode?q=E%2058th%20St%20and%20Madison%20Ave%2C%20New%20York%2C%20NY&api_key=YOUR_API_KEY" target="_blank">E 58th St and Madison Ave, New York, NY</a>
+* <a href="https://api.geocod.io/v1/geocode?q=Market%20and%204th%2C%20San%20Francisco&api_key=YOUR_API_KEY" target="_blank">Market and 4th, San Francisco</a>
+* <a href="https://api.geocod.io/v1/geocode?q=Commonwealth%20Ave%20at%20Washington%20Street%2C%20Boston%2C%20MA&api_key=YOUR_API_KEY" target="_blank">Commonwealth Ave at Washington Street, Boston, MA</a>
+* <a href="https://api.geocod.io/v1/geocode?q=Florencia%20%26%20Perlita%2C%20Austin%20TX&api_key=YOUR_API_KEY" target="_blank">Florencia & Perlita, Austin TX</a>
+* <a href="https://api.geocod.io/v1/geocode?q=Quail%20Trail%20%40%20Dinkle%20Rd%2C%20Edgewood%2C%20NM&api_key=YOUR_API_KEY" target="_blank">Quail Trail @ Dinkle Rd, Edgewood, NM</a>
+* <a href="https://api.geocod.io/v1/geocode?q=8th%20St%20SE%2FI%20St%20SE%2C%2020003&api_key=YOUR_API_KEY" target="_blank">8th St SE/I St SE, 20003</a>
+
+An extrac `address_components_secondary` property will be exposed for intersection results, but otherwise the schema format is the same.
+
+<pre class="inline">
+{
+  ...
+  "results": [
+    {
+      "address_components": {
+        "street": "4th",
+        "suffix": "St",
+        "formatted_street": "4th St",
+        "city": "San Francisco",
+        "county": "San Francisco County",
+        "state": "CA",
+        "zip": "94103"
+      },
+      "address_components_secondary": {
+        "street": "Market",
+        "suffix": "St",
+        "formatted_street": "Market St",
+        "city": "San Francisco",
+        "county": "San Francisco County",
+        "state": "CA",
+        "zip": "94103"
+      },
+      "formatted_address": "4th St and Market St, San Francisco, CA 94103",
+      "location": {
+        "lat": 37.785725,
+        "lng": -122.405807
+      },
+      "accuracy": 1,
+      "accuracy_type": "intersection",
+      "source": "TIGER/Line® dataset from the US Census Bureau"
+    }
+  ]
+  ...
+}
+</pre>
+
+
 # Reverse Geocoding
 
 Reverse geocoding is the process of turning geographic coordinates (i.e. latitude and longitude) into a human-readable address.
@@ -1279,7 +1330,7 @@ Generally the accuracy score can be mapped as following:
 
 Value   | Description
 ------- | -----------
->= 1.0  | Exact match
+= 1.0  | Exact match
 >= 0.8  | We found the street, but not the street number
 >= 0.6  | Match to neighborhood
 >= 0.5  | Match to city
@@ -1298,7 +1349,7 @@ place               | The point is a city/town/place
 # Address formats
 Geocodio allows you to geocode addresses, cities or zip codes. A street address needs to have either a zip OR a city/state combination. If a city is provided without a state, Geocodio will automatically guess and add the state based on what it most likely might be. Geocodio also understands shorthands for both streets and cities, e.g. *NYC*, *SF*, etc. are acceptable city names.
 
-Addresses that are used with the geocoding API need to be predictably formatted. Here are some examples of valid addresses:
+Geocoding queries can be formatted in various ways. Here are some examples of valid queries:
 
 * 42370 Bob Hope Dr, Rancho Mirage CA
 * 42370 Bob Hope Drive, Rancho Mirage CA

@@ -1336,8 +1336,9 @@ Value   | Description
 >= 0.5  | Match to city
 < 0.5   | Generally only used for second or third choice results
 
-An accuracy type is also returned with all results, possible accuracy types are:
-`rooftop`, `range_interpolation`, `street_center`, and `place`.
+An accuracy type is also returned with all results, the accuracy types are different for forward and reverse geocoding results.
+
+### Forward geocoding
 
 Value               | Description
 ------------------- | -----------
@@ -1345,6 +1346,13 @@ rooftop             | We found the exact point with rooftop level accuracy
 range_interpolation | We found the exact point by performing [address range interpolation](http://en.wikipedia.org/wiki/Geocoding#Address_interpolation)
 street_center       | The result is a geocoded street centroid
 place               | The point is a city/town/place
+
+### Reverse geocoding
+
+Value               | Description
+------------------- | -----------
+nearest_street      | Nearest match for a specific street with estimated street number
+nearest_place       | Closest city/town/place
 
 # Address formats
 Geocodio allows you to geocode addresses, cities or zip codes. A street address needs to have either a zip OR a city/state combination. If a city is provided without a state, Geocodio will automatically guess and add the state based on what it most likely might be. Geocodio also understands shorthands for both streets and cities, e.g. *NYC*, *SF*, etc. are acceptable city names.

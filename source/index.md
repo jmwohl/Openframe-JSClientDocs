@@ -1336,7 +1336,7 @@ Value   | Description
 >= 0.5  | Match to city
 < 0.5   | Generally only used for second or third choice results
 
-An accuracy type is also returned with all results, the accuracy types are different for forward and reverse geocoding results.
+An accuracy type is also returned with all results. The accuracy types are different for forward and reverse geocoding results.
 
 ### Forward geocoding
 

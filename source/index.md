@@ -20,7 +20,7 @@ toc_footers:
 
 Geocodio is a geocoding and reverse geocoding service that aims to fill a void in the community by allowing developers to geocode and reverse geocode large amounts of US addresses without worrying about daily limits and high costs.
 
-Our pricing structure is simple: you get the first 2,500 queries per day for free and after that you are charged $0.001 per query (yep, that's $1 per 1,000 geocoding queries). This applies to all users.
+Our pricing structure is simple: you get the first 2,500 queries per day for free and after that you are charged $0.0005 per query (yep, that's $0.50 per 1,000 geocoding queries). This applies to all users.
 
 We provide a simple RESTful API, with a base url at `https://api.geocod.io/v1/` (You can also use Geocodio over plain HTTP at `http://api.geocod.io/v1/`, but it's not recommended).
 
@@ -42,7 +42,7 @@ Basic examples for various languages are provided here. Please make sure to chec
   </tr>
   <tr>
     <td><strong>PHP</strong></td>
-    <td><a href="https://github.com/davidstanley01/geocodio-php" target="_blank">davidstanley01/geocodio-php</a> by <a href="https://twitter.com/davidstanley01" target="_blank">@davidstanley01</a></td>
+    <td><a href="https://github.com/Geocodio/geocodio-php" target="_blank">Geocodio/geocodio-php</a> originally by <a href="https://twitter.com/davidstanley01" target="_blank">@davidstanley01</a></td>
     <td><i class="fa fa-check"></i></td>
   </tr>
   <tr>

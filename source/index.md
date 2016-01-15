@@ -522,7 +522,7 @@ You can also geocode intersections, just specify the two streets that you want t
 * <a href="https://api.geocod.io/v1/geocode?q=Quail%20Trail%20%40%20Dinkle%20Rd%2C%20Edgewood%2C%20NM&api_key=YOUR_API_KEY" target="_blank">Quail Trail @ Dinkle Rd, Edgewood, NM</a>
 * <a href="https://api.geocod.io/v1/geocode?q=8th%20St%20SE%2FI%20St%20SE%2C%2020003&api_key=YOUR_API_KEY" target="_blank">8th St SE/I St SE, 20003</a>
 
-An extrac `address_components_secondary` property will be exposed for intersection results, but otherwise the schema format is the same.
+An extra `address_components_secondary` property will be exposed for intersection results, but otherwise the schema format is the same.
 
 <pre class="inline">
 {

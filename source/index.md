@@ -1084,6 +1084,10 @@ geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', ['cd', 'stateleg'], f
 }
 ```
 
+<aside class="notice">
+**Note:** Fields count as an additional lookup each. Please consult the <a href="/pricing">pricing page</a>.
+</aside>
+
 Geocodio allows you to request additional information with forward and reverse geocoding requests, we call these *fields*.
 
 Requesting fields are easy, just add a `fields` parameter to your query string and set the value according to the table below. If you want multiple fields, just separate them with a comma. If the `fields` parameter has been specified, a new `fields` key is exposed with each geocoding result containing all necessary data for each field.

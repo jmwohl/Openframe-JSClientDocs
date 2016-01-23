@@ -326,7 +326,7 @@ from geocodio import GeocodioClient
 
 client = GeocodioClient(YOUR_API_KEY)
 
-locations = geocodio.geocode([
+locations = client.geocode([
   '42370 Bob Hope Drive, Rancho Mirage CA',
   '1290 Northbrook Court Mall, Northbrook IL',
   '4410 S Highway 17 92, Casselberry FL',
@@ -501,9 +501,9 @@ Here's a couple of examples of what the `POST` body can look like:
 {
   "1": {
     "street": "42370 Bob Hope Drive",
-    "city:" "Rancho Mirage",
-    "state" "CA"
-  }
+    "city": "Rancho Mirage",
+    "state": "CA"
+  },
   "2": {
     "city": "Northbrook",
     "postal_code": 60062
@@ -953,7 +953,7 @@ from geocodio import GeocodioClient
 
 client = GeocodioClient(YOUR_API_KEY)
 
-location = client.geocode("42370 Bob Hope Drive, Rancho Mirage CA", ["cd", "stateleg"])
+location = client.geocode("42370 Bob Hope Drive, Rancho Mirage CA", fields=["cd", "stateleg"])
 ```
 
 ```php

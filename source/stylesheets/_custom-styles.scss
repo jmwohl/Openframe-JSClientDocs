@@ -1,0 +1,16 @@
+.tocify-wrapper {
+  font-size: 18px;
+
+  .tocify-subheader .tocify-item > a {
+    font-size: 16px;
+  }
+}
+
+.content blockquote > p {
+  border: none;
+}
+
+pre.inline {
+  float: none;
+  clear: none;
+}

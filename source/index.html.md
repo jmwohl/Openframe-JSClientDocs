@@ -18,11 +18,17 @@ toc_footers:
 
 > <i class="fa fa-chevron-circle-up"></i> Pick your favorite programming language
 
-Geocodio is a geocoding and reverse geocoding service that aims to fill a void in the community by allowing developers to geocode and reverse geocode large amounts of US addresses without worrying about daily limits and high costs.
+Geocodio's RESTful API allows you to perform forward and reverse geocoding lookups. We support both batch requests as well as individual lookups.
 
-Our pricing structure is simple: you get the first 2,500 queries per day for free and after that you are charged $0.0005 per query (yep, that's $0.50 per 1,000 geocoding queries). This applies to all users.
+You can also optionally ask for data appends such as timezone, congressional districts or similar things of that nature.
 
-We provide a simple RESTful API, with a base url at `https://api.geocod.io/v1/` (You can also use Geocodio over plain HTTP at `http://api.geocod.io/v1/`, but it's not recommended).
+The base API url is `https://api.geocod.io/v1/`.
+
+You can also use Geocodio over plain HTTP at `http://api.geocod.io/v1/`, but it's not recommended.
+
+All HTTP responses (including errors) are returned with [JSON-formatted](http://www.json.org) output.
+
+We may add additional fields to the output, but existing fields will never be changed or removed without a new API version release.
 
 <aside class="notice">
 Note the versioning prefix in the base url, which is required for all requests.
@@ -30,7 +36,7 @@ Note the versioning prefix in the base url, which is required for all requests.
 
 # Libraries
 
-Thanks to our great community, we have language bindings for Ruby, Python, PHP, Perl, Node.js and Clojure.
+Thanks to the wonderful open-source community, we have language bindings for several languages and platforms.
 
 Basic examples for various languages are provided here. Please make sure to check out the full documentation for the individual libraries (linked below).
 
@@ -86,16 +92,16 @@ Basic examples for various languages are provided here. Please make sure to chec
     <td><i class="fa fa-minus"></i></td>
   </tr>
   <tr>
-    <td colspan="3">Are you the author of an awesome library that you would like to get featured here? Just <a href="mailto:hello@geocod.io">let us know</a>!</td>
+    <td colspan="3">Are you the author of an awesome library that you would like to get featured here? Just <a href="mailto:hello@geocod.io">let us know</a> or <a href="https://github.com/geocodio/docs" target="_blank">create a pull request</a>.</td>
   </tr>
 </tbody></table>
 
 # Authentication
 
-> To initialize and authenticate using the API key:
+> To set the `API_KEY`:
 
 ```shell
-# With shell, you can just pass the query parameter with each request
+# With curl, you can just pass the query parameter with each request
 curl "https://api.geocod.io/v1/api_endpoint_here?api_key=YOUR_API_KEY"
 ```
 
@@ -142,25 +148,29 @@ All requests require an API key. You can [register here](https://dash.geocod.io)
 
 The API key must be included in all requests using the `?api_key=YOUR_API_KEY` query parameter.
 
-Accounts can have multiple API keys. This is ideal if you're working on several projects and want to be able to revoke access using the API key for a single project in the future or if you want to keep track of usage per API key. And, you can download a CSV of usage and fees per API key if you need to bill clients for usage.
+Accounts can have multiple API keys. This can be useful if you're working on several projects and want to be able to revoke access using the API key for a single project in the future or if you want to keep track of usage per API key.
+
+You can also download a CSV of usage and fees per API key.
 
 <aside class="warning">
-Make sure to replace `YOUR_API_KEY` with your personal API key found in the [Geocodio dashboard](https://dash.gecod.io).
+Make sure to replace `YOUR_API_KEY` with your personal API key found on the <a href="https://dash.geocod.io" target="_blank">Geocodio dashboard</a>.
 </aside>
 
 # Geocoding
 
-Geocoding (also known as forward geocoding) allows you to convert one or more addresses into geographic coordinates (i.e. latitude and longitude).
+Geocoding (also known as forward geocoding) allows you to convert one or more addresses into geographic coordinates (i.e. latitude and longitude). Geocoding will also parse the address and append additional information (e.g. if you specify a zip code, Geocodio will return the city and state corresponding the zip code as well)
 
 Geocodio supports geocoding of addresses, cities and zip codes in various formats.
 
 <aside class="notice">
-Make sure to check the [address formats](#toc_26) section for more information on the different address formats supported.
+Make sure to check the <a href="#address-formats">address formats</a> section for more information on the different address formats supported.
 </aside>
 
-You can either geocode a single address at a time or collect multiple addresses in batches in order to geocode up to 10,000 addresses at the time. Whenever possible, please make batch requests.
+You can either geocode a single address at a time or collect multiple addresses in batches in order to geocode up to 10,000 addresses at the time.
 
-## Geocoding single address
+Whenever possible, batch requests are recommended since they are significantly faster due to reduced network overhead.
+
+## Single address
 
 A single address can be geocoded by making a simple `GET` request to the *geocode* endpoint, you can <a href="https://api.geocod.io/v1/geocode?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&api_key=YOUR_API_KEY" target="_blank">try this in your browser right now</a>.
 
@@ -292,7 +302,7 @@ api_key | Your Geocodio API key
 
 **Alternative URL Parameters**
 
-Instead of using the *q* parameter, you can use a combination of street, city, state and/or postal_code. This is useful if the address is already stored as separate fields in your end.
+Instead of using the *q* parameter, you can use a combination of street, city, state and/or postal_code. This might be useful if the address is already stored as separate fields in your end.
 
 Parameter | Description
 --------- | -----------
@@ -303,7 +313,7 @@ postal_code | E.g. 20500 (Can be omitted if city or city/state has been specifie
 api_key | Your Geocodio API key
 
 <aside>
-**Note:** Even if the fields are supplied separately, Geocodio might in rare circumstances try to parse e.g. the street as part of the city if more relevant results can be found.
+<strong>Note:</strong> Even if the fields are supplied separately, Geocodio might in rare circumstances try to parse e.g. the street as part of the city if more relevant results can be found.
 </aside>
 
 ## Batch geocoding
@@ -457,7 +467,7 @@ If you have several addresses that you need to geocode, batch geocoding is a muc
 Batch geocoding requests are performed by making a `POST` request to the *geocode* endpoint, suppliying a `JSON` array in the body or a `JSON` object with any key of your choosing.
 
 <aside class="warning">
-You can batch geocode up to 10,000 addresses at the time.
+You can batch geocode up to 10,000 addresses at the time. Geocoding 10,000 addresses takes about 300 seconds, so please make sure to adjust your timeout value accordingly.
 </aside>
 
 ### HTTP Request
@@ -516,57 +526,6 @@ Here's a couple of examples of what the `POST` body can look like:
 }
 </pre>
 
-## Geocoding intersections
-
-You can also geocode intersections, just specify the two streets that you want to geocode in your query. We support various formats, here's a few examples:
-
-* <a href="https://api.geocod.io/v1/geocode?q=E%2058th%20St%20and%20Madison%20Ave%2C%20New%20York%2C%20NY&api_key=YOUR_API_KEY" target="_blank">E 58th St and Madison Ave, New York, NY</a>
-* <a href="https://api.geocod.io/v1/geocode?q=Market%20and%204th%2C%20San%20Francisco&api_key=YOUR_API_KEY" target="_blank">Market and 4th, San Francisco</a>
-* <a href="https://api.geocod.io/v1/geocode?q=Commonwealth%20Ave%20at%20Washington%20Street%2C%20Boston%2C%20MA&api_key=YOUR_API_KEY" target="_blank">Commonwealth Ave at Washington Street, Boston, MA</a>
-* <a href="https://api.geocod.io/v1/geocode?q=Florencia%20%26%20Perlita%2C%20Austin%20TX&api_key=YOUR_API_KEY" target="_blank">Florencia & Perlita, Austin TX</a>
-* <a href="https://api.geocod.io/v1/geocode?q=Quail%20Trail%20%40%20Dinkle%20Rd%2C%20Edgewood%2C%20NM&api_key=YOUR_API_KEY" target="_blank">Quail Trail @ Dinkle Rd, Edgewood, NM</a>
-* <a href="https://api.geocod.io/v1/geocode?q=8th%20St%20SE%2FI%20St%20SE%2C%2020003&api_key=YOUR_API_KEY" target="_blank">8th St SE/I St SE, 20003</a>
-
-An extra `address_components_secondary` property will be exposed for intersection results, but otherwise the schema format is the same.
-
-<pre class="inline">
-{
-  ...
-  "results": [
-    {
-      "address_components": {
-        "street": "4th",
-        "suffix": "St",
-        "formatted_street": "4th St",
-        "city": "San Francisco",
-        "county": "San Francisco County",
-        "state": "CA",
-        "zip": "94103"
-      },
-      "address_components_secondary": {
-        "street": "Market",
-        "suffix": "St",
-        "formatted_street": "Market St",
-        "city": "San Francisco",
-        "county": "San Francisco County",
-        "state": "CA",
-        "zip": "94103"
-      },
-      "formatted_address": "4th St and Market St, San Francisco, CA 94103",
-      "location": {
-        "lat": 37.785725,
-        "lng": -122.405807
-      },
-      "accuracy": 1,
-      "accuracy_type": "intersection",
-      "source": "TIGER/Line® dataset from the US Census Bureau"
-    }
-  ]
-  ...
-}
-</pre>
-
-
 # Reverse Geocoding
 
 Reverse geocoding is the process of turning geographic coordinates (i.e. latitude and longitude) into a human-readable address.
@@ -575,7 +534,7 @@ Geocodio will find matching street(s) and determine the correct house number bas
 
 As with forward geocoding, you can either geocode a single set of coordinates at the time or collect multiple coordinates in batches and reverse geocode up to 10,000 coordinates at the time.
 
-This endpoint can return up to 5 possible matches ranked and ordered by an [accuracy score](#toc_25).
+This endpoint can return up to 5 possible matches ranked and ordered by an [accuracy score](#accuracy-score).
 
 <aside class="success">
 A geographic coordinate consists of latitude followed by longitude separated by a comma, e.g. `38.9002898,-76.9990361`
@@ -1089,8 +1048,8 @@ geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', ['cd', 'stateleg'], f
 }
 ```
 
-<aside class="notice">
-**Note:** Fields count as an additional lookup each. Please consult the <a href="/pricing">pricing page</a>.
+<aside class="warning">
+<strong>Note:</strong> Fields count as an additional lookup each. Please consult the <a href="/pricing">pricing page</a>.
 </aside>
 
 Geocodio allows you to request additional information with forward and reverse geocoding requests, we call these *fields*.
@@ -1229,7 +1188,7 @@ SST          | Samoa Standard Time
 # Address parsing
 
 <aside class="warning">
-**DEPRECATED**
+<strong>DEPRECATED</strong>
 
 As of June 2015 the parse endpoint has been deprecated in favor of the regular geocode endpoint that also provides address parsing. The parse endpoint is unsupported and will be completely removed in the future.
 </aside>
@@ -1239,7 +1198,7 @@ If you just need to an address into individual components, Geocodio can help you
 If you need these features we recommend that you use the regular geocoding endpoint and retrieve the parsed components from there.
 
 <aside class="notice">
-Note: Address parsing is free of charge and does not count towards your API usage. (You still need an API key, though.)
+<strong>Note:</strong> Address parsing is free of charge and does not count towards your API usage. (You still need an API key, though.)
 </aside>
 
 > To parse an address:
@@ -1325,10 +1284,10 @@ q | The query (i.e. address) to parse
 api_key | Your Geocodio API key
 
 <aside class="notice">
-Make sure to check the [address formatting](#toc_26) section for more information on the different address formats supported.
+Make sure to check the <a href="#address-formats">address formats</a> section for more information on the different address formats supported.
 </aside>
 
-# Accuracy score and accuracy type
+# Accuracy score
 Each geocoded result is returned with an accuracy score, which is a decimal number ranging from 0.00 to 1.00. This score is generated by the internal Geocodio engine based on how accurate the result is believed to be. The higher the score the better the result.
 
 For example, if against all odds an address simply can't be found — instead of returning no results, Geocodio will return a geocoded point based on the zip code or city but with a much lower accuracy score and accuracy type set to "place".
@@ -1353,8 +1312,10 @@ Value               | Description
 ------------------- | -----------
 rooftop             | We found the exact point with rooftop level accuracy
 range_interpolation | We found the exact point by performing [address range interpolation](http://en.wikipedia.org/wiki/Geocoding#Address_interpolation)
+point               | We found the exact point from address range interpolation where the range contained a single point
 street_center       | The result is a geocoded street centroid
 place               | The point is a city/town/place
+state               | The point is a state
 
 ### Reverse geocoding
 
@@ -1375,7 +1336,58 @@ Geocoding queries can be formatted in various ways. Here are some examples of va
 * 42370 Bob Hope Dr, 92270
 * Rancho Mirage, CA
 * Rancho Mirage
+* CA
 * 92270
+
+## Intersections
+
+You can also geocode intersections, just specify the two streets that you want to geocode in your query. We support various formats, here's a few examples:
+
+* <a href="https://api.geocod.io/v1/geocode?q=E%2058th%20St%20and%20Madison%20Ave%2C%20New%20York%2C%20NY&api_key=YOUR_API_KEY" target="_blank">E 58th St and Madison Ave, New York, NY</a>
+* <a href="https://api.geocod.io/v1/geocode?q=Market%20and%204th%2C%20San%20Francisco&api_key=YOUR_API_KEY" target="_blank">Market and 4th, San Francisco</a>
+* <a href="https://api.geocod.io/v1/geocode?q=Commonwealth%20Ave%20at%20Washington%20Street%2C%20Boston%2C%20MA&api_key=YOUR_API_KEY" target="_blank">Commonwealth Ave at Washington Street, Boston, MA</a>
+* <a href="https://api.geocod.io/v1/geocode?q=Florencia%20%26%20Perlita%2C%20Austin%20TX&api_key=YOUR_API_KEY" target="_blank">Florencia & Perlita, Austin TX</a>
+* <a href="https://api.geocod.io/v1/geocode?q=Quail%20Trail%20%40%20Dinkle%20Rd%2C%20Edgewood%2C%20NM&api_key=YOUR_API_KEY" target="_blank">Quail Trail @ Dinkle Rd, Edgewood, NM</a>
+* <a href="https://api.geocod.io/v1/geocode?q=8th%20St%20SE%2FI%20St%20SE%2C%2020003&api_key=YOUR_API_KEY" target="_blank">8th St SE/I St SE, 20003</a>
+
+An extra `address_components_secondary` property will be exposed for intersection results, but otherwise the schema format is the same.
+
+<pre class="inline">
+{
+  ...
+  "results": [
+    {
+      "address_components": {
+        "street": "4th",
+        "suffix": "St",
+        "formatted_street": "4th St",
+        "city": "San Francisco",
+        "county": "San Francisco County",
+        "state": "CA",
+        "zip": "94103"
+      },
+      "address_components_secondary": {
+        "street": "Market",
+        "suffix": "St",
+        "formatted_street": "Market St",
+        "city": "San Francisco",
+        "county": "San Francisco County",
+        "state": "CA",
+        "zip": "94103"
+      },
+      "formatted_address": "4th St and Market St, San Francisco, CA 94103",
+      "location": {
+        "lat": 37.785725,
+        "lng": -122.405807
+      },
+      "accuracy": 1,
+      "accuracy_type": "intersection",
+      "source": "TIGER/Line® dataset from the US Census Bureau"
+    }
+  ]
+  ...
+}
+</pre>
 
 # Errors
 > Here is an example of a 422 Unprocessable Entity response:
@@ -1395,6 +1407,7 @@ Error Code | Meaning
 422 Unprocessable Entity | A client error prevented the request from executing succesfully (e.g. invalid address provided). A JSON object will be returned with an error key containing a full error message
 500 Server Error | Hopefully you will never see this...it means that something went wrong in our end. Whoops.
 
+Please check [status.geocod.io](http://status.geocod.io) for latest platform status updates, if encounter see any unexpected errors.
 
 # Client-side access
 > To Geocode an address using a jQuery AJAX call.
@@ -1415,7 +1428,7 @@ The Geocodio API supports `CORS` using the `Access-Control-Allow-Origin` *HTTP* 
 See an example to the right.
 
 <aside class="notice">
-**Note:** This will expose your API Key publicly, make sure that you understand and accept the implications of this approach.
+<strong>Note:</strong> This will expose your API Key publicly, make sure that you understand and accept the implications of this approach.
 </aside>
 
 # Contact & Support

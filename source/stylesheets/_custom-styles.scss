@@ -1,8 +1,19 @@
 .tocify-wrapper {
-  font-size: 18px;
+  font-size: 15px;
 
-  .tocify-subheader .tocify-item > a {
-    font-size: 16px;
+  .tocify-focus, .tocify-hover {
+    background: none !important;
+    color: $aside-warning-bg;
+  }
+
+  .tocify-item {
+    box-shadow: none;
+  }
+
+  .tocify-subheader {
+    .tocify-item > a {
+      font-size: 15px;
+    }
   }
 }
 
@@ -13,4 +24,8 @@
 pre.inline {
   float: none;
   clear: none;
+}
+
+.content aside.warning {
+  color: #FFF;
 }

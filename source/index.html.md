@@ -24,11 +24,11 @@ You can also optionally ask for data appends such as timezone, congressional dis
 
 The base API url is `https://api.geocod.io/v1/`.
 
-You can also use Geocodio over plain HTTP at `http://api.geocod.io/v1/`, but it's not recommended.
+You can also use Geocodio over plain HTTP, but it's not recommended.
 
 All HTTP responses (including errors) are returned with [JSON-formatted](http://www.json.org) output.
 
-We may add additional fields to the output, but existing fields will never be changed or removed without a new API version release.
+We may add additional properties to the output in the future, but existing properties will never be changed or removed without a new API version release.
 
 <aside class="notice">
 Note the versioning prefix in the base url, which is required for all requests.
@@ -153,7 +153,7 @@ Accounts can have multiple API keys. This can be useful if you're working on sev
 You can also download a CSV of usage and fees per API key.
 
 <aside class="warning">
-Make sure to replace `YOUR_API_KEY` with your personal API key found on the <a href="https://dash.geocod.io" target="_blank">Geocodio dashboard</a>.
+Make sure to replace YOUR_API_KEY with your personal API key found on the <a href="https://dash.geocod.io" target="_blank">Geocodio dashboard</a>.
 </aside>
 
 # Geocoding
@@ -302,14 +302,15 @@ api_key | Your Geocodio API key
 
 **Alternative URL Parameters**
 
-Instead of using the *q* parameter, you can use a combination of street, city, state and/or postal_code. This might be useful if the address is already stored as separate fields in your end.
+Instead of using the *q* parameter, you can use a combination of `street`, `city`, `state` `postal_code`, and/or `country`. This might be useful if the address is already stored as separate fields in your end.
 
 Parameter | Description
 --------- | -----------
 street | E.g. 1600 Pennsylvania Ave NW
-city | E.g. Washington (Can be omitted if zip code has been specified)
-state | E.g. DC (Can be omitted if zip code has been specified)
-postal_code | E.g. 20500 (Can be omitted if city or city/state has been specified)
+city | E.g. Washington
+state | E.g. DC
+postal_code | E.g. 20500
+country | E.g. Canada (Default to USA)
 api_key | Your Geocodio API key
 
 <aside>
@@ -462,9 +463,9 @@ geocodio.geocode(addresses, function(err, locations) {
 }
 ```
 
-If you have several addresses that you need to geocode, batch geocoding is a much faster options since it removes the overhead of having to perform multiple `HTTP` requests.
+If you have several addresses that you need to geocode, batch geocoding is a much faster option since it removes the overhead of having to perform multiple `HTTP` requests.
 
-Batch geocoding requests are performed by making a `POST` request to the *geocode* endpoint, suppliying a `JSON` array in the body or a `JSON` object with any key of your choosing.
+Batch geocoding requests are performed by making a `POST` request to the *geocode* endpoint, suppliying a `JSON` array or `JSON` object in the body with any key of your choosing.
 
 <aside class="warning">
 You can batch geocode up to 10,000 addresses at the time. Geocoding 10,000 addresses takes about 300 seconds, so please make sure to adjust your timeout value accordingly.
@@ -878,7 +879,7 @@ geocodio.reverse(coordinates, function(err, address_sets){
 }
 ```
 
-If you have several coordinates that you need to reverse geocode, batch reverse geocoding is a much faster options since it removes the overhead of having to perform multiple `HTTP` requests.
+If you have several coordinates that you need to reverse geocode, batch reverse geocoding is a much faster option since it removes the overhead of having to perform multiple `HTTP` requests.
 
 Batch reverse geocoding requests are performed by making a `POST` request to the *reverse* endpoint, suppliying a `JSON` array in the body.
 
@@ -1058,16 +1059,19 @@ Requesting fields are easy, just add a `fields` parameter to your query string a
 
 Go ahead, <a href="https://api.geocod.io/v1/geocode?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&fields=cd&api_key=YOUR_API_KEY" target="_blank">try this in your browser right now</a>.
 
-Parameter name         | Description
----------------------- | -----------------------------------------------------------
-cd, cd113, *or* cd114  | Congressional District for the current congress (or the 114th congress)
-stateleg               | State Legislative District (House & Senate)
-school                 | School District (elementary/secondary or unified)
-timezone               | Timezone
+Some fields are specific to the US and can not be queried for other countries.
+
+Parameter name         | Description                                       | Coverage                    |
+---------------------- | ------------------------------------------------- | --------------------------- |
+cd, cd113, *or* cd114  | Congressional District                            | US-only                     |
+stateleg               | State Legislative District (House & Senate)       | US-only                     |
+school                 | School District (elementary/secondary or unified) | US-only                     |
+timezone               | Timezone                                          | <i class="fa fa-globe"></i> |
+
 
 
 <aside class="notice">
-Fields works both with single and batch geocoding.
+Fields works with both single and batch geocoding.
 </aside>
 
 ## Congressional Districts
@@ -1111,6 +1115,10 @@ It might be tempting to look congressional districts up by zip code, but this is
 You can retrieve the state legislative districts for an address or coordinate using `stateleg` in the `fields` query parameter.
 
 The field will return both the *house* and *senate* state legislative district (also known as *lower* and *upper*) with the full name and district numbe for each. For areas with a [unicameral legislature](http://en.wikipedia.org/wiki/Unicameralism) (such as Washington DC or Nebraska), only the `senate` key is returned.
+
+<aside class="success">
+State Legislative District boundary data were last updated on: <em>Februrary 28th, 2016</em>
+</aside>
 
 ## School Districts
 > Unified school district example
@@ -1171,7 +1179,7 @@ The field will return either a *unified* school district or separate *elementary
 ```
 You can retrieve the timezone for an address or coordinate using `timezone` in the `fields` query parameter.
 
-The field will return the name of the timezone as a three letter abbreviation (see table below), the UTC/GMT offset and whether the location observes daylight savings time (DST).
+The field will return the name of the timezone as a three letter abbreviation (see table below), the UTC/GMT offset and whether the location observes daylight savings time (DST). Lookups in countries outside the US will return the timezone name following the ["tz database" format](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). E.g. `America/Toronto`
 
 Abbreviation | Description
 ------------ | -----------------------------------------------------------
@@ -1190,7 +1198,7 @@ SST          | Samoa Standard Time
 <aside class="warning">
 <strong>DEPRECATED</strong>
 
-As of June 2015 the parse endpoint has been deprecated in favor of the regular geocode endpoint that also provides address parsing. The parse endpoint is unsupported and will be completely removed in the future.
+As of June 2015 the parse endpoint has been deprecated in favor of the regular geocode endpoint that is greatly improved and also provides address parsing. The parse endpoint is unsupported and will be completely removed in the future.
 </aside>
 
 If you just need to an address into individual components, Geocodio can help you too. The parse endpoint is however very simple and does not provide intelligent address correction and address completion.
@@ -1288,31 +1296,23 @@ Make sure to check the <a href="#address-formats">address formats</a> section fo
 </aside>
 
 # Accuracy score
-Each geocoded result is returned with an accuracy score, which is a decimal number ranging from 0.00 to 1.00. This score is generated by the internal Geocodio engine based on how accurate the result is believed to be. The higher the score the better the result.
+Each geocoded result is returned with an accuracy score, which is a decimal number ranging from 0.00 to 1.00. This score is generated by the internal Geocodio engine based on how accurate the result is believed to be. The higher the score the better the result. Results are always returned ordered by accuracy score.
 
 For example, if against all odds an address simply can't be found — instead of returning no results, Geocodio will return a geocoded point based on the zip code or city but with a much lower accuracy score and accuracy type set to "place".
 
-Results are always returned ordered by accuracy score.
-
-Generally the accuracy score can be mapped as following:
-
-Value   | Description
-------- | -----------
-= 1.0  | Exact match
->= 0.8  | We found the street, but not the street number
->= 0.6  | Match to neighborhood
->= 0.5  | Match to city
-< 0.5   | Generally only used for second or third choice results
+Generally, accuracy scores that are larger than or equal to `0.8` are usually helpful, whereas results with lower accuracy scores might be very rough matches.
 
 An accuracy type is also returned with all results. The accuracy types are different for forward and reverse geocoding results.
+
+We recommend using a combination of the accuracy score and accuracy type to evaluate and filter the returned results.
 
 ### Forward geocoding
 
 Value               | Description
 ------------------- | -----------
 rooftop             | We found the exact point with rooftop level accuracy
-range_interpolation | We found the exact point by performing [address range interpolation](http://en.wikipedia.org/wiki/Geocoding#Address_interpolation)
 point               | We found the exact point from address range interpolation where the range contained a single point
+range_interpolation | We found the exact point by performing [address range interpolation](http://en.wikipedia.org/wiki/Geocoding#Address_interpolation)
 street_center       | The result is a geocoded street centroid
 place               | The point is a city/town/place
 state               | The point is a state
@@ -1325,19 +1325,27 @@ nearest_street      | Nearest match for a specific street with estimated street 
 nearest_place       | Closest city/town/place
 
 # Address formats
-Geocodio allows you to geocode addresses, cities or zip codes. A street address needs to have either a zip OR a city/state combination. If a city is provided without a state, Geocodio will automatically guess and add the state based on what it most likely might be. Geocodio also understands shorthands for both streets and cities, e.g. *NYC*, *SF*, etc. are acceptable city names.
+Geocodio supports geocoding the following entities:
+
+* Streets with or without house numbers (requires a city or a zip in conjuction)
+* [Intersections](#intersections)
+* Cities
+* Zip codes
+* States
+
+If a city is provided without a state, Geocodio will automatically guess and add the state based on what it most likely might be. Geocodio also understands shorthands for both streets and cities, e.g. *NYC*, *SF*, etc. are acceptable city names.
 
 Geocoding queries can be formatted in various ways. Here are some examples of valid queries:
 
-* 42370 Bob Hope Dr, Rancho Mirage CA
-* 42370 Bob Hope Drive, Rancho Mirage CA
-* 42370 Bob Hope Dr, Rancho Mirage, CA
-* 42370 Bob Hope Dr, Rancho Mirage CA
-* 42370 Bob Hope Dr, 92270
-* Rancho Mirage, CA
-* Rancho Mirage
-* CA
-* 92270
+* <a href="https://api.geocod.io/v1/geocode?q=42370%20Bob%20Hope%20Dr%2C%20Rancho%20Mirage%20CA&api_key=YOUR_API_KEY" target="_blank">42370 Bob Hope Dr, Rancho Mirage CA</a>
+* <a href="https://api.geocod.io/v1/geocode?q=42370%20Bob%20Hope%20Drive%2C%20Rancho%20Mirage%20CA&api_key=YOUR_API_KEY" target="_blank">42370 Bob Hope Drive, Rancho Mirage CA</a>
+* <a href="https://api.geocod.io/v1/geocode?q=42370%20Bob%20Hope%20Dr%2C%20Rancho%20Mirage,%20CA&api_key=YOUR_API_KEY" target="_blank">42370 Bob Hope Dr, Rancho Mirage, CA</a>
+* <a href="https://api.geocod.io/v1/geocode?q=42370%20Bob%20Hope%20Dr%2C%20Rancho%20Mirage%20CA&api_key=YOUR_API_KEY" target="_blank">42370 Bob Hope Dr, Rancho Mirage CA</a>
+* <a href="https://api.geocod.io/v1/geocode?q=42370%20Bob%20Hope%20Dr%2C%2092270&api_key=YOUR_API_KEY" target="_blank">42370 Bob Hope Dr, 92270</a>
+* <a href="https://api.geocod.io/v1/geocode?q=Rancho%20Mirage%2C%20CA&api_key=YOUR_API_KEY" target="_blank">Rancho Mirage, CA</a>
+* <a href="https://api.geocod.io/v1/geocode?q=Rancho%20Mirage&api_key=YOUR_API_KEY" target="_blank">Rancho Mirage</a>
+* <a href="https://api.geocod.io/v1/geocode?q=CA&api_key=YOUR_API_KEY" target="_blank">CA</a>
+* <a href="https://api.geocod.io/v1/geocode?q=92270&api_key=YOUR_API_KEY" target="_blank">92270</a>
 
 ## Intersections
 

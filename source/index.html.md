@@ -172,16 +172,16 @@ Whenever possible, batch requests are recommended since they are significantly f
 
 ## Single address
 
-A single address can be geocoded by making a simple `GET` request to the *geocode* endpoint, you can <a href="https://api.geocod.io/v1/geocode?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&api_key=YOUR_API_KEY" target="_blank">try this in your browser right now</a>.
+A single address can be geocoded by making a simple `GET` request to the *geocode* endpoint, you can <a href="https://api.geocod.io/v1/geocode?q=1109+N+Highland+St%2c+Arlington+VA&api_key=YOUR_API_KEY" target="_blank">try this in your browser right now</a>.
 
 > To geocode a single address:
 
 ```shell
 # Using q parameter
-curl "https://api.geocod.io/v1/geocode?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&api_key=YOUR_API_KEY"
+curl "https://api.geocod.io/v1/geocode?q=1109+N+Highland+St%2c+Arlington+VA&api_key=YOUR_API_KEY"
 
 # Using individual address components
-curl "https://api.geocod.io/v1/geocode?street=42370+Bob+Hope+Drive&city=Rancho+Mirage&state=CA&api_key=YOUR_API_KEY"
+curl "https://api.geocod.io/v1/geocode?street=1109+N+Highland+St&city=Arlington&state=VA&api_key=YOUR_API_KEY"
 ```
 
 ```ruby
@@ -189,7 +189,7 @@ require 'geocodio'
 
 geocodio = Geocodio::Client.new('YOUR_API_KEY')
 
-location = geocodio.geocode(['42370 Bob Hope Drive, Rancho Mirage CA'])
+location = geocodio.geocode(['1109 N Highland St, Arlington VA'])
 ```
 
 ```python
@@ -197,7 +197,7 @@ from geocodio import GeocodioClient
 
 client = GeocodioClient(YOUR_API_KEY)
 
-location = client.geocode("42370 Bob Hope Drive, Rancho Mirage CA")
+location = client.geocode("1109 N Highland St, Arlington VA")
 ```
 
 ```php
@@ -208,7 +208,7 @@ use Stanley\Geocodio\Client;
 // Create the new Client object by passing in your api key
 $client = new Client('YOUR_API_KEY');
 
-$location = $client->get('42370 Bob Hope Drive, Rancho Mirage CA');
+$location = $client->get('1109 N Highland St, Arlington VA');
 ```
 
 ```javascript
@@ -220,7 +220,7 @@ var config = {
 
 var geocodio = new Geocodio(config);
 
-geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', function(err, location) {
+geocodio.geocode('1109 N Highland St, Arlington VA', function(err, location) {
     if (err) throw err;
 
     console.log(location);
@@ -231,7 +231,7 @@ geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', function(err, locatio
 (ns my.ns
   (:require [rodeo.core :refer :all]))
 
-(single "42370 Bob Hope Drive, Rancho Mirage CA" :api_key "YOUR_API_KEY")
+(single "1109 N Highland St, Arlington VA" :api_key "YOUR_API_KEY")
 ```
 
 > Example response:
@@ -240,48 +240,40 @@ geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', function(err, locatio
 {
   "input": {
     "address_components": {
-      "number": "42370",
-      "street": "Bob Hope",
-      "suffix": "Dr",
-      "city": "Rancho Mirage",
-      "state": "CA"
+      "number": "1109",
+      "predirectional": "N",
+      "street": "Highland",
+      "suffix": "St",
+      "formatted_street": "N Highland St",
+      "city": "Arlington",
+      "state": "VA",
+      "zip": "22201",
+      "country": "US"
     },
-    "formatted_address": "42370 Bob Hope Dr, Rancho Mirage, CA"
+    "formatted_address": "1109 N Highland St, Arlington, VA 22201"
   },
   "results": [
     {
       "address_components": {
-        "number": "42370",
-        "street": "Bob Hope",
-        "suffix": "Dr",
-        "city": "Rancho Mirage",
-        "county": "Riverside County",
-        "state": "CA",
-        "zip": "92270"
+        "number": "1109",
+        "predirectional": "N",
+        "street": "Highland",
+        "suffix": "St",
+        "formatted_street": "N Highland St",
+        "city": "Arlington",
+        "county": "Arlington County",
+        "state": "VA",
+        "zip": "22201",
+        "country": "US"
       },
-      "formatted_address": "42370 Bob Hope Dr, Rancho Mirage, CA 92270",
+      "formatted_address": "1109 N Highland St, Arlington, VA 22201",
       "location": {
-        "lat": 33.738987255507,
-        "lng": -116.40833849559
+        "lat": 38.886665,
+        "lng": -77.094733
       },
-      "accuracy": 1
-    },
-    {
-      "address_components": {
-        "number": "42370",
-        "street": "Bob Hope",
-        "suffix": "Dr",
-        "city": "Rancho Mirage",
-        "county": "Riverside County",
-        "state": "CA",
-        "zip": "92270"
-      },
-      "formatted_address": "42370 Bob Hope Dr, Rancho Mirage, CA 92270",
-      "location": {
-        "lat": 33.738980796909,
-        "lng": -116.40833917329
-      },
-      "accuracy": 0.8
+      "accuracy": 1,
+      "accuracy_type": "rooftop",
+      "source": "Virginia GIS Clearinghouse"
     }
   ]
 }
@@ -324,7 +316,7 @@ api_key | Your Geocodio API key
 ```shell
 curl -X POST \
   -H "Content-Type: application/json" \
-  -d '["42370 Bob Hope Drive, Rancho Mirage CA", "1290 Northbrook Court Mall, Northbrook IL", "4410 S Highway 17 92, Casselberry FL", "15000 NE 24th Street, Redmond WA", "17015 Walnut Grove Drive, Morgan Hill CA"]' \
+  -d '["1109 N Highland St, Arlington VA", "525 University Ave, Toronto, ON, Canada", "4410 S Highway 17 92, Casselberry FL", "15000 NE 24th Street, Redmond WA", "17015 Walnut Grove Drive, Morgan Hill CA"]' \
   https://api.geocod.io/v1/geocode?api_key=YOUR_API_KEY
 ```
 
@@ -333,7 +325,7 @@ require 'geocodio'
 
 geocodio = Geocodio::Client.new('YOUR_API_KEY')
 
-locations = geocodio.geocode(['42370 Bob Hope Drive, Rancho Mirage CA', '1290 Northbrook Court Mall, Northbrook IL', '4410 S Highway 17 92, Casselberry FL', '15000 NE 24th Street, Redmond WA', '17015 Walnut Grove Drive, Morgan Hill CA'])
+locations = geocodio.geocode(['1109 N Highland St, Arlington VA', '525 University Ave, Toronto, ON, Canada', '4410 S Highway 17 92, Casselberry FL', '15000 NE 24th Street, Redmond WA', '17015 Walnut Grove Drive, Morgan Hill CA'])
 
 ```
 
@@ -343,8 +335,8 @@ from geocodio import GeocodioClient
 client = GeocodioClient(YOUR_API_KEY)
 
 locations = client.geocode([
-  '42370 Bob Hope Drive, Rancho Mirage CA',
-  '1290 Northbrook Court Mall, Northbrook IL',
+  '1109 N Highland St, Arlington VA',
+  '525 University Ave, Toronto, ON, Canada',
   '4410 S Highway 17 92, Casselberry FL',
   '15000 NE 24th Street, Redmond WA',
   '17015 Walnut Grove Drive, Morgan Hill CA'
@@ -360,8 +352,8 @@ use Stanley\Geocodio\Client;
 $client = new Client('YOUR_API_KEY');
 
 $data = array(
-  '42370 Bob Hope Drive, Rancho Mirage CA',
-  '1290 Northbrook Court Mall, Northbrook IL',
+  '1109 N Highland St, Arlington VA',
+  '525 University Ave, Toronto, ON, Canada',
   '4410 S Highway 17 92, Casselberry FL',
   '15000 NE 24th Street, Redmond WA',
   '17015 Walnut Grove Drive, Morgan Hill CA'
@@ -379,8 +371,8 @@ var config = {
 var geocodio = new Geocodio(config);
 
 var addresses = [
-  '42370 Bob Hope Drive, Rancho Mirage CA',
-  '1290 Northbrook Court Mall, Northbrook IL',
+  '1109 N Highland St, Arlington VA',
+  '525 University Ave, Toronto, ON, Canada',
   '4410 S Highway 17 92, Casselberry FL',
   '15000 NE 24th Street, Redmond WA',
   '17015 Walnut Grove Drive, Morgan Hill CA'
@@ -399,7 +391,7 @@ geocodio.geocode(addresses, function(err, locations) {
 
 ;; You can set the API key in the GEOCODIO_API_KEY environment variable
 
-(batch ["42370 Bob Hope Drive, Rancho Mirage CA" "1290 Northbrook Court Mall, Northbrook IL" "4410 S Highway 17 92, Casselberry FL" "15000 NE 24th Street, Redmond WA" "17015 Walnut Grove Drive, Morgan Hill CA"] :api_key "YOUR_API_KEY")
+(batch ["1109 N Highland St, Arlington VA" "525 University Ave, Toronto, ON, Canada" "4410 S Highway 17 92, Casselberry FL" "15000 NE 24th Street, Redmond WA" "17015 Walnut Grove Drive, Morgan Hill CA"] :api_key "YOUR_API_KEY")
 ```
 
 > Example response:
@@ -408,52 +400,44 @@ geocodio.geocode(addresses, function(err, locations) {
 {
   "results": [
     {
-      "query": "42370 Bob Hope Drive, Rancho Mirage CA",
+      "query": "1109 N Highland St, Arlington VA",
       "response": {
         "input": {
           "address_components": {
-            "number": "42370",
-            "street": "Bob Hope",
-            "suffix": "Dr",
-            "city": "Rancho Mirage",
-            "state": "CA"
+            "number": "1109",
+            "predirectional": "N",
+            "street": "Highland",
+            "suffix": "St",
+            "formatted_street": "N Highland St",
+            "city": "Arlington",
+            "state": "VA",
+            "zip": "22201",
+            "country": "US"
           },
-          "formatted_address": "42370 Bob Hope Dr, Rancho Mirage CA"
+          "formatted_address": "1109 N Highland St, Arlington, VA 22201"
         },
         "results": [
           {
             "address_components": {
-              "number": "42370",
-              "street": "Bob Hope",
-              "suffix": "Dr",
-              "city": "Rancho Mirage",
-              "county": "Riverside County",
-              "state": "CA",
-              "zip": "92270"
+              "number": "1109",
+              "predirectional": "N",
+              "street": "Highland",
+              "suffix": "St",
+              "formatted_street": "N Highland St",
+              "city": "Arlington",
+              "county": "Arlington County",
+              "state": "VA",
+              "zip": "22201",
+              "country": "US"
             },
-            "formatted_address": "42370 Bob Hope Dr, Rancho Mirage CA, 92270",
+            "formatted_address": "1109 N Highland St, Arlington, VA 22201",
             "location": {
-              "lat": 33.738987255507,
-              "lng": -116.40833849559
+              "lat": 38.886665,
+              "lng": -77.094733
             },
-            "accuracy": 1
-          },
-          {
-            "address_components": {
-              "number": "42370",
-              "street": "Bob Hope",
-              "suffix": "Dr",
-              "city": "Rancho Mirage",
-              "county": "Riverside County",
-              "state": "CA",
-              "zip": "92270"
-            },
-            "formatted_address": "42370 Bob Hope Dr, Rancho Mirage CA, 92270",
-            "location": {
-              "lat": 33.738980796909,
-              "lng": -116.40833917329
-            },
-            "accuracy": 0.8
+            "accuracy": 1,
+            "accuracy_type": "rooftop",
+            "source": "Virginia GIS Clearinghouse"
           }
         ]
       }
@@ -493,8 +477,8 @@ Here's a couple of examples of what the `POST` body can look like:
 ### JSON array
 <pre class="inline">
 [
-  "42370 Bob Hope Drive, Rancho Mirage CA",
-  "1290 Northbrook Court Mall, Northbrook IL",
+  "1109 N Highland St, Arlington VA",
+  "525 University Ave, Toronto, ON, Canada",
   "4410 S Highway 17 92, Casselberry FL",
   "15000 NE 24th Street, Redmond WA",
   "17015 Walnut Grove Drive, Morgan Hill CA"
@@ -504,8 +488,8 @@ Here's a couple of examples of what the `POST` body can look like:
 ### JSON object
 <pre class="inline">
 {
-  "1": "42370 Bob Hope Drive, Rancho Mirage CA",
-  "2": "1290 Northbrook Court Mall, Northbrook IL",
+  "1": "1109 N Highland St, Arlington VA",
+  "2": "525 University Ave, Toronto, ON, Canada",
   "3": "4410 S Highway 17 92, Casselberry FL",
   "4": "15000 NE 24th Street, Redmond WA",
   "5": "17015 Walnut Grove Drive, Morgan Hill CA"
@@ -516,13 +500,13 @@ Here's a couple of examples of what the `POST` body can look like:
 <pre class="inline">
 {
   "1": {
-    "street": "42370 Bob Hope Drive",
-    "city": "Rancho Mirage",
-    "state": "CA"
+    "street": "1109 N Highland St",
+    "city": "Arlington",
+    "state": "VA"
   },
   "2": {
-    "city": "Northbrook",
-    "postal_code": 60062
+    "city": "Toronto",
+    "country": "CA"
   }
 }
 </pre>
@@ -611,17 +595,43 @@ geocodio.reverse('38.9002898,-76.9990361', function(err, addresses) {
         "street": "H",
         "suffix": "St",
         "postdirectional": "NE",
+        "formatted_street": "H St NE",
         "city": "Washington",
         "county": "District of Columbia",
         "state": "DC",
-        "zip": "20002"
+        "zip": "20002",
+        "country": "US"
       },
       "formatted_address": "500 H St NE, Washington, DC 20002",
       "location": {
         "lat": 38.900203,
         "lng": -76.999507
       },
-      "accuracy": 1
+      "accuracy": 1,
+      "accuracy_type": "nearest_street",
+      "source": "TIGER/Line® dataset from the US Census Bureau"
+    },
+    {
+      "address_components": {
+        "number": "800",
+        "street": "5th",
+        "suffix": "St",
+        "postdirectional": "NE",
+        "formatted_street": "5th St NE",
+        "city": "Washington",
+        "county": "District of Columbia",
+        "state": "DC",
+        "zip": "20002",
+        "country": "US"
+      },
+      "formatted_address": "800 5th St NE, Washington, DC 20002",
+      "location": {
+        "lat": 38.900203,
+        "lng": -76.999507
+      },
+      "accuracy": 0.18,
+      "accuracy_type": "nearest_street",
+      "source": "TIGER/Line® dataset from the US Census Bureau"
     },
     {
       "address_components": {
@@ -629,35 +639,21 @@ geocodio.reverse('38.9002898,-76.9990361', function(err, addresses) {
         "street": "H",
         "suffix": "St",
         "postdirectional": "NE",
+        "formatted_street": "H St NE",
         "city": "Washington",
         "county": "District of Columbia",
         "state": "DC",
-        "zip": "20002"
+        "zip": "20002",
+        "country": "US"
       },
       "formatted_address": "474 H St NE, Washington, DC 20002",
       "location": {
         "lat": 38.900205,
         "lng": -76.99994
       },
-      "accuracy": 0.18
-    },
-    {
-      "address_components": {
-        "number": "749",
-        "street": "5th",
-        "suffix": "St",
-        "postdirectional": "NE",
-        "city": "Washington",
-        "county": "District of Columbia",
-        "state": "DC",
-        "zip": "20002"
-      },
-      "formatted_address": "749 5th St NE, Washington, DC 20002",
-      "location": {
-        "lat": 38.898911,
-        "lng": -76.999509
-      },
-      "accuracy": 0.18
+      "accuracy": 0.18,
+      "accuracy_type": "nearest_street",
+      "source": "TIGER/Line® dataset from the US Census Bureau"
     }
   ]
 }
@@ -762,17 +758,21 @@ geocodio.reverse(coordinates, function(err, address_sets){
             "address_components": {
               "number": "101",
               "street": "State Hwy 58",
+              "formatted_street": "State Hwy 58",
               "city": "Nashville",
               "county": "Nash County",
               "state": "NC",
-              "zip": "27856"
+              "zip": "27856",
+              "country": "US"
             },
             "formatted_address": "101 State Hwy 58, Nashville, NC 27856",
             "location": {
               "lat": 35.974536,
               "lng": -77.965716
             },
-            "accuracy": 1
+            "accuracy": 1,
+            "accuracy_type": "nearest_street",
+            "source": "TIGER/Line® dataset from the US Census Bureau"
           },
           {
             "address_components": {
@@ -780,35 +780,43 @@ geocodio.reverse(coordinates, function(err, address_sets){
               "predirectional": "N",
               "street": "Alston",
               "suffix": "St",
+              "formatted_street": "N Alston St",
               "city": "Nashville",
               "county": "Nash County",
               "state": "NC",
-              "zip": "27856"
+              "zip": "27856",
+              "country": "US"
             },
             "formatted_address": "100 N Alston St, Nashville, NC 27856",
             "location": {
               "lat": 35.974536,
               "lng": -77.965716
             },
-            "accuracy": 0.37
+            "accuracy": 0.37,
+            "accuracy_type": "nearest_street",
+            "source": "TIGER/Line® dataset from the US Census Bureau"
           },
           {
             "address_components": {
-              "number": "126",
-              "predirectional": "E",
-              "street": "Washington",
+              "number": "125",
+              "predirectional": "S",
+              "street": "Alston",
               "suffix": "St",
+              "formatted_street": "S Alston St",
               "city": "Nashville",
               "county": "Nash County",
               "state": "NC",
-              "zip": "27856"
+              "zip": "27856",
+              "country": "US"
             },
-            "formatted_address": "126 E Washington St, Nashville, NC 27856",
+            "formatted_address": "125 S Alston St, Nashville, NC 27856",
             "location": {
-              "lat": 35.974456,
-              "lng": -77.965429
+              "lat": 35.974263,
+              "lng": -77.965823
             },
-            "accuracy": 0.36
+            "accuracy": 0.36,
+            "accuracy_type": "nearest_street",
+            "source": "TIGER/Line® dataset from the US Census Bureau"
           }
         ]
       }
@@ -823,17 +831,21 @@ geocodio.reverse(coordinates, function(err, address_sets){
               "predirectional": "E",
               "street": "Kingsley",
               "suffix": "Rd",
+              "formatted_street": "E Kingsley Rd",
               "city": "Garland",
               "county": "Dallas County",
               "state": "TX",
-              "zip": "75041"
+              "zip": "75041",
+              "country": "US"
             },
             "formatted_address": "100 E Kingsley Rd, Garland, TX 75041",
             "location": {
               "lat": 32.878693,
               "lng": -96.630918
             },
-            "accuracy": 1
+            "accuracy": 1,
+            "accuracy_type": "nearest_street",
+            "source": "TIGER/Line® dataset from the US Census Bureau"
           },
           {
             "address_components": {
@@ -841,17 +853,21 @@ geocodio.reverse(coordinates, function(err, address_sets){
               "predirectional": "S",
               "street": "1st",
               "suffix": "St",
+              "formatted_street": "S 1st St",
               "city": "Garland",
               "county": "Dallas County",
               "state": "TX",
-              "zip": "75041"
+              "zip": "75041",
+              "country": "US"
             },
             "formatted_address": "2961 S 1st St, Garland, TX 75041",
             "location": {
               "lat": 32.881541,
               "lng": -96.630962
             },
-            "accuracy": 0.92
+            "accuracy": 0.92,
+            "accuracy_type": "nearest_street",
+            "source": "TIGER/Line® dataset from the US Census Bureau"
           },
           {
             "address_components": {
@@ -859,17 +875,21 @@ geocodio.reverse(coordinates, function(err, address_sets){
               "predirectional": "S",
               "street": "1st",
               "suffix": "St",
+              "formatted_street": "S 1st St",
               "city": "Garland",
               "county": "Dallas County",
               "state": "TX",
-              "zip": "75041"
+              "zip": "75041",
+              "country": "US"
             },
             "formatted_address": "3084 S 1st St, Garland, TX 75041",
             "location": {
               "lat": 32.878897,
               "lng": -96.630992
             },
-            "accuracy": 0.87
+            "accuracy": 0.87,
+            "accuracy_type": "nearest_street",
+            "source": "TIGER/Line® dataset from the US Census Bureau"
           }
         ]
       }
@@ -902,7 +922,7 @@ api_key | Your Geocodio API key
 > To get the congressional district and stage legislative districts for an address:
 
 ```shell
-curl "https://api.geocod.io/v1/geocode?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&fields=cd,stateleg&api_key=YOUR_API_KEY"
+curl "https://api.geocod.io/v1/geocode?q=1109+N+Highland+St%2c+Arlington+VA&fields=cd,stateleg&api_key=YOUR_API_KEY"
 ```
 
 ```ruby
@@ -910,7 +930,7 @@ require 'geocodio'
 
 geocodio = Geocodio::Client.new('YOUR_API_KEY')
 
-location = geocodio.geocode(['42370 Bob Hope Drive, Rancho Mirage CA'], :fields %w[cd stateleg])
+location = geocodio.geocode(['1109 N Highland St, Arlington VA'], :fields %w[cd stateleg])
 ```
 
 ```python
@@ -918,7 +938,7 @@ from geocodio import GeocodioClient
 
 client = GeocodioClient(YOUR_API_KEY)
 
-location = client.geocode("42370 Bob Hope Drive, Rancho Mirage CA", fields=["cd", "stateleg"])
+location = client.geocode("1109 N Highland St, Arlington VA", fields=["cd", "stateleg"])
 ```
 
 ```php
@@ -929,7 +949,7 @@ use Stanley\Geocodio\Client;
 // Create the new Client object by passing in your api key
 $client = new Client('YOUR_API_KEY');
 
-$location = $client->get('42370 Bob Hope Drive, Rancho Mirage CA', ['cd', 'stateleg']);
+$location = $client->get('1109 N Highland St, Arlington VA', ['cd', 'stateleg']);
 ```
 
 ```javascript
@@ -945,7 +965,7 @@ var config = {
 
 var geocodio = new Geocodio(config);
 
-geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', ['cd', 'stateleg'], function(err, location) {
+geocodio.geocode('1109 N Highland St, Arlington VA', ['cd', 'stateleg'], function(err, location) {
     if (err) throw err;
 
     console.log(location);
@@ -957,7 +977,7 @@ geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', ['cd', 'stateleg'], f
 (ns my.ns
   (:require [rodeo.core :refer :all]))
 
-(single "42370 Bob Hope Drive, Rancho Mirage CA" :api_key "YOUR_API_KEY" :fields ["cd" "stateleg"])
+(single "1109 N Highland St, Arlington VA" :api_key "YOUR_API_KEY" :fields ["cd" "stateleg"])
 ```
 
 > Example response:
@@ -966,81 +986,55 @@ geocodio.geocode('42370 Bob Hope Drive, Rancho Mirage CA', ['cd', 'stateleg'], f
 {
   "input": {
     "address_components": {
-      "number": "42370",
-      "street": "Bob Hope",
-      "suffix": "Dr",
-      "city": "Rancho Mirage",
-      "state": "CA"
+      "number": "1109",
+      "predirectional": "N",
+      "street": "Highland",
+      "suffix": "St",
+      "formatted_street": "N Highland St",
+      "city": "Arlington",
+      "state": "VA",
+      "zip": "22201",
+      "country": "US"
     },
-    "formatted_address": "42370 Bob Hope Dr, Rancho Mirage, CA"
+    "formatted_address": "1109 N Highland St, Arlington, VA 22201"
   },
   "results": [
     {
       "address_components": {
-        "number": "42370",
-        "street": "Bob Hope",
-        "suffix": "Dr",
-        "city": "Rancho Mirage",
-        "county": "Riverside County",
-        "state": "CA",
-        "zip": "92270"
+        "number": "1109",
+        "predirectional": "N",
+        "street": "Highland",
+        "suffix": "St",
+        "formatted_street": "N Highland St",
+        "city": "Arlington",
+        "county": "Arlington County",
+        "state": "VA",
+        "zip": "22201",
+        "country": "US"
       },
-      "formatted_address": "42370 Bob Hope Dr, Rancho Mirage, CA 92270",
+      "formatted_address": "1109 N Highland St, Arlington, VA 22201",
       "location": {
-        "lat": 33.738987255507,
-        "lng": -116.40833849559
+        "lat": 38.886665,
+        "lng": -77.094733
       },
       "accuracy": 1,
+      "accuracy_type": "rooftop",
+      "source": "Virginia GIS Clearinghouse",
       "fields": {
         "congressional_district": {
-          "name": "Congressional District 36",
-          "district_number": 36,
+          "name": "Congressional District 8",
+          "district_number": 8,
           "congress_number": "114th",
-          "congress_years": "2013-2015"
+          "congress_years": "2015-2017"
         },
         "state_legislative_districts": {
-          "house": {
-            "name": "Assembly District 42",
-            "district_number": 42
-          },
           "senate": {
-            "name": "State Senate District 28",
-            "district_number": 28
-          }
-        }
-      }
-    },
-    {
-      "address_components": {
-        "number": "42370",
-        "street": "Bob Hope",
-        "suffix": "Dr",
-        "city": "Rancho Mirage",
-        "county": "Riverside County",
-        "state": "CA",
-        "zip": "92270"
-      },
-      "formatted_address": "42370 Bob Hope Dr, Rancho Mirage, CA 92270",
-      "location": {
-        "lat": 33.738980796909,
-        "lng": -116.40833917329
-      },
-      "accuracy": 0.8,
-      "fields": {
-        "congressional_district": {
-          "name": "Congressional District 36",
-          "district_number": 36,
-          "congress_number": "114th",
-          "congress_years": "2013-2015"
-        },
-        "state_legislative_districts": {
-          "house": {
-            "name": "Assembly District 42",
-            "district_number": 42
+            "name": "State Senate District 31",
+            "district_number": "31"
           },
-          "senate": {
-            "name": "State Senate District 28",
-            "district_number": 28
+          "house": {
+            "name": "State House District 47",
+            "district_number": "47"
           }
         }
       }
@@ -1057,7 +1051,7 @@ Geocodio allows you to request additional information with forward and reverse g
 
 Requesting fields are easy, just add a `fields` parameter to your query string and set the value according to the table below. If you want multiple fields, just separate them with a comma. If the `fields` parameter has been specified, a new `fields` key is exposed with each geocoding result containing all necessary data for each field.
 
-Go ahead, <a href="https://api.geocod.io/v1/geocode?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&fields=cd&api_key=YOUR_API_KEY" target="_blank">try this in your browser right now</a>.
+Go ahead, <a href="https://api.geocod.io/v1/geocode?q=1109+N+Highland+St%2c+Arlington+VA&fields=cd&api_key=YOUR_API_KEY" target="_blank">try this in your browser right now</a>.
 
 Some fields are specific to the US and can not be queried for other countries.
 
@@ -1212,7 +1206,7 @@ If you need these features we recommend that you use the regular geocoding endpo
 > To parse an address:
 
 ```shell
-curl "https://api.geocod.io/v1/parse?q=42370+Bob+Hope+Drive%2c+Rancho+Mirage+CA&api_key=YOUR_API_KEY"
+curl "https://api.geocod.io/v1/parse?q=1109+N+Highland+St%2c+Arlington+VA&api_key=YOUR_API_KEY"
 ```
 
 ```ruby
@@ -1220,7 +1214,7 @@ require 'geocodio'
 
 geocodio = Geocodio::Client.new('YOUR_API_KEY')
 
-address = geocodio.parse('42370 Bob Hope Drive, Rancho Mirage CA')
+address = geocodio.parse('1109 N Highland St, Arlington VA')
 ```
 
 ```python
@@ -1228,7 +1222,7 @@ from geocodio import GeocodioClient
 
 client = GeocodioClient(YOUR_API_KEY)
 
-address = client.parse('42370 Bob Hope Drive, Rancho Mirage CA')
+address = client.parse('1109 N Highland St, Arlington VA')
 ```
 
 ```php
@@ -1239,7 +1233,7 @@ use Stanley\Geocodio\Client;
 // Create the new Client object by passing in your api key
 $client = new Client('YOUR_API_KEY');
 
-$address = $client->parse('42370 Bob Hope Drive, Rancho Mirage CA');
+$address = $client->parse('1109 N Highland St, Arlington VA');
 ```
 
 ```javascript
@@ -1251,7 +1245,7 @@ var config = {
 
 var geocodio = new Geocodio(config);
 
-geocodio.parse('42370 Bob Hope Drive, Rancho Mirage CA', function(err, address) {
+geocodio.parse('1109 N Highland St, Arlington VA', function(err, address) {
     if (err) throw err;
 
     console.log(address);
@@ -1262,7 +1256,7 @@ geocodio.parse('42370 Bob Hope Drive, Rancho Mirage CA', function(err, address) 
 (ns my.ns
   (:require [rodeo.core :refer :all]))
 
-(components "42370 Bob Hope Dr, Rancho Mirage CA" :api_key "YOUR_API_KEY")
+(components "1109 N Highland St, Arlington VA" :api_key "YOUR_API_KEY")
 ```
 
 > Example response:
@@ -1270,13 +1264,16 @@ geocodio.parse('42370 Bob Hope Drive, Rancho Mirage CA', function(err, address) 
 ```json
 {
   "address_components": {
-    "number": "42370",
-    "street": "Bob Hope",
-    "suffix": "Dr",
-    "city": "Rancho Mirage",
-    "state": "CA"
+    "number": "1109",
+    "predirectional": "N",
+    "street": "Highland",
+    "suffix": "St",
+    "formatted_street": "N Highland St",
+    "city": "Arlington",
+    "state": "VA",
+    "country": "US"
   },
-  "formatted_address": "42370 Bob Hope Dr, Rancho Mirage CA"
+  "formatted_address": "1109 N Highland St, Arlington, VA"
 }
 ```
 
@@ -1337,26 +1334,33 @@ If a city is provided without a state, Geocodio will automatically guess and add
 
 Geocoding queries can be formatted in various ways. Here are some examples of valid queries:
 
-* <a href="https://api.geocod.io/v1/geocode?q=42370%20Bob%20Hope%20Dr%2C%20Rancho%20Mirage%20CA&api_key=YOUR_API_KEY" target="_blank">42370 Bob Hope Dr, Rancho Mirage CA</a>
-* <a href="https://api.geocod.io/v1/geocode?q=42370%20Bob%20Hope%20Drive%2C%20Rancho%20Mirage%20CA&api_key=YOUR_API_KEY" target="_blank">42370 Bob Hope Drive, Rancho Mirage CA</a>
-* <a href="https://api.geocod.io/v1/geocode?q=42370%20Bob%20Hope%20Dr%2C%20Rancho%20Mirage,%20CA&api_key=YOUR_API_KEY" target="_blank">42370 Bob Hope Dr, Rancho Mirage, CA</a>
-* <a href="https://api.geocod.io/v1/geocode?q=42370%20Bob%20Hope%20Dr%2C%20Rancho%20Mirage%20CA&api_key=YOUR_API_KEY" target="_blank">42370 Bob Hope Dr, Rancho Mirage CA</a>
-* <a href="https://api.geocod.io/v1/geocode?q=42370%20Bob%20Hope%20Dr%2C%2092270&api_key=YOUR_API_KEY" target="_blank">42370 Bob Hope Dr, 92270</a>
-* <a href="https://api.geocod.io/v1/geocode?q=Rancho%20Mirage%2C%20CA&api_key=YOUR_API_KEY" target="_blank">Rancho Mirage, CA</a>
-* <a href="https://api.geocod.io/v1/geocode?q=Rancho%20Mirage&api_key=YOUR_API_KEY" target="_blank">Rancho Mirage</a>
-* <a href="https://api.geocod.io/v1/geocode?q=CA&api_key=YOUR_API_KEY" target="_blank">CA</a>
-* <a href="https://api.geocod.io/v1/geocode?q=92270&api_key=YOUR_API_KEY" target="_blank">92270</a>
+* <a href="https://api.geocod.io/v1/geocode?q=1109+N+Highland+St%2c+Arlington+VA&api_key=YOUR_API_KEY" target="_blank">1109 N Highland St, Arlington VA</a>
+* <a href="https://api.geocod.io/v1/geocode?q=1109+N+Highland+Street%2c+Arlington+VA&api_key=YOUR_API_KEY" target="_blank">1109 N Highland Street, Arlington VA</a>
+* <a href="https://api.geocod.io/v1/geocode?q=1109+North+Highland+Street%2c+Arlington+VA&api_key=YOUR_API_KEY" target="_blank">1109 North Highland Street, Arlington VA</a>
+* <a href="https://api.geocod.io/v1/geocode?q=1109+N+Highland+St%2c+Arlington+VA&api_key=YOUR_API_KEY" target="_blank">1109 N Highland St, Arlington VA</a>
+* <a href="https://api.geocod.io/v1/geocode?q=1109+N+Highland+St,+22201&api_key=YOUR_API_KEY" target="_blank">1109 N Highland St, 22201</a>
+* <a href="https://api.geocod.io/v1/geocode?q=Arlington%2c+VA&api_key=YOUR_API_KEY" target="_blank">Arlington, VA</a>
+* <a href="https://api.geocod.io/v1/geocode?q=Arlington&api_key=YOUR_API_KEY" target="_blank">Arlington</a>
+* <a href="https://api.geocod.io/v1/geocode?q=VA&api_key=YOUR_API_KEY" target="_blank">VA</a>
+* <a href="https://api.geocod.io/v1/geocode?q=22201&api_key=YOUR_API_KEY" target="_blank">22201</a>
+
+If a country is not specified in the query, the Geocoding engine will implicitly assume the country to be USA.
+
+Examples of Canadian lookups:
+
+* <a href="https://api.geocod.io/v1/geocode?q=525+University+Ave%2C+Toronto%2C+ON%2C+Canada&api_key=YOUR_API_KEY" target="_blank">525 University Ave, Toronto, ON, Canada</a>
+* <a href="https://api.geocod.io/v1/geocode?q=7515+118+Ave+NW%2C+Edmonton%2C+AB+T5B+0X2%2C+Canada&api_key=YOUR_API_KEY" target="_blank">7515 118 Ave NW, Edmonton, AB T5B 0X2, Canada</a>
 
 ## Intersections
 
 You can also geocode intersections, just specify the two streets that you want to geocode in your query. We support various formats, here's a few examples:
 
-* <a href="https://api.geocod.io/v1/geocode?q=E%2058th%20St%20and%20Madison%20Ave%2C%20New%20York%2C%20NY&api_key=YOUR_API_KEY" target="_blank">E 58th St and Madison Ave, New York, NY</a>
-* <a href="https://api.geocod.io/v1/geocode?q=Market%20and%204th%2C%20San%20Francisco&api_key=YOUR_API_KEY" target="_blank">Market and 4th, San Francisco</a>
-* <a href="https://api.geocod.io/v1/geocode?q=Commonwealth%20Ave%20at%20Washington%20Street%2C%20Boston%2C%20MA&api_key=YOUR_API_KEY" target="_blank">Commonwealth Ave at Washington Street, Boston, MA</a>
-* <a href="https://api.geocod.io/v1/geocode?q=Florencia%20%26%20Perlita%2C%20Austin%20TX&api_key=YOUR_API_KEY" target="_blank">Florencia & Perlita, Austin TX</a>
-* <a href="https://api.geocod.io/v1/geocode?q=Quail%20Trail%20%40%20Dinkle%20Rd%2C%20Edgewood%2C%20NM&api_key=YOUR_API_KEY" target="_blank">Quail Trail @ Dinkle Rd, Edgewood, NM</a>
-* <a href="https://api.geocod.io/v1/geocode?q=8th%20St%20SE%2FI%20St%20SE%2C%2020003&api_key=YOUR_API_KEY" target="_blank">8th St SE/I St SE, 20003</a>
+* <a href="https://api.geocod.io/v1/geocode?q=E+58th+St+and+Madison+Ave%2C+New+York%2C+NY&api_key=YOUR_API_KEY" target="_blank">E 58th St and Madison Ave, New York, NY</a>
+* <a href="https://api.geocod.io/v1/geocode?q=Market+and+4th%2C+San+Francisco&api_key=YOUR_API_KEY" target="_blank">Market and 4th, San Francisco</a>
+* <a href="https://api.geocod.io/v1/geocode?q=Commonwealth+Ave+at+Washington+Street%2C+Boston%2C+MA&api_key=YOUR_API_KEY" target="_blank">Commonwealth Ave at Washington Street, Boston, MA</a>
+* <a href="https://api.geocod.io/v1/geocode?q=Florencia+%26+Perlita%2C+Austin+TX&api_key=YOUR_API_KEY" target="_blank">Florencia & Perlita, Austin TX</a>
+* <a href="https://api.geocod.io/v1/geocode?q=Quail+Trail+%40+Dinkle+Rd%2C+Edgewood%2C+NM&api_key=YOUR_API_KEY" target="_blank">Quail Trail @ Dinkle Rd, Edgewood, NM</a>
+* <a href="https://api.geocod.io/v1/geocode?q=8th+St+SE%2FI+St+SE%2C+20003&api_key=YOUR_API_KEY" target="_blank">8th St SE/I St SE, 20003</a>
 
 An extra `address_components_secondary` property will be exposed for intersection results, but otherwise the schema format is the same.
 
@@ -1422,7 +1426,7 @@ Please check [status.geocod.io](http://status.geocod.io) for latest platform sta
 
 ```html
 <script>
-var address = '42370 Bob Hope Dr, Rancho Mirage CA',
+var address = '1109 N Highland St, Arlington VA',
     apiKey = 'YOUR_API_KEY';
 
 $.get('https://api.geocod.io/v1/geocode?q='+ encodeURIComponent(address) +'&api_key=' + encodeURIComponent(apiKey), function (response) {

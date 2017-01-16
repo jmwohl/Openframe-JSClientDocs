@@ -1055,13 +1055,13 @@ Go ahead, <a href="https://api.geocod.io/v1/geocode?q=1109+N+Highland+St%2c+Arli
 
 Some fields are specific to the US and can not be queried for other countries.
 
-Parameter name         | Description                                       | Coverage                    |
----------------------- | ------------------------------------------------- | --------------------------- |
-cd, cd113, *or* cd114  | Congressional District                            | US-only                     |
-stateleg               | State Legislative District (House & Senate)       | US-only                     |
-school                 | School District (elementary/secondary or unified) | US-only                     |
-census                 | Census Block/Tract & FIPS codes                   | US-only                     |
-timezone               | Timezone                                          | <i class="fa fa-globe"></i> |
+Parameter name                | Description                                       | Coverage                    |
+----------------------------- | ------------------------------------------------- | --------------------------- |
+cd, cd113, cd114, *or* cd115  | Congressional District                            | US-only                     |
+stateleg                      | State Legislative District (House & Senate)       | US-only                     |
+school                        | School District (elementary/secondary or unified) | US-only                     |
+census                        | Census Block/Tract & FIPS codes                   | US-only                     |
+timezone                      | Timezone                                          | <i class="fa fa-globe"></i> |
 
 
 
@@ -1076,13 +1076,13 @@ Fields works with both single and batch geocoding.
   "congressional_district": {
     "name": "Congressional District 36",
     "district_number": 36,
-    "congress_number": "114th",
-    "congress_years": "2013-2015"
+    "congress_number": "115th",
+    "congress_years": "2017-2019"
   }
 }
 ...
 ```
-You can retrieve the congressional district for an address or coordinate using `cd`, `cd113`, or `cd114` in the `fields` query parameter. `cd` will always return the congressional district for the current progress while `cd113` will continue to show the congressional district for the 113th congress.
+You can retrieve the congressional district for an address or coordinate using `cd`, `cd113`, `cd114`, or `cd115` in the `fields` query parameter. `cd` will always return the congressional district for the current progress while e.g. `cd113` will continue to show the congressional district for the 113th congress.
 
 The field returns the full name of the congressional district, the district number the congress number and the range of years the congress are covering.
 
